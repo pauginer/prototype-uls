@@ -1,0 +1,48 @@
+div.display-settings-block {
+	/* @embed */
+	background: transparent url('../images/display.png') left top no-repeat;
+	background-image: -webkit-linear-gradient(transparent, transparent), url('../images/display.svg');
+	background-image: -moz-linear-gradient(transparent, transparent), url('../images/display.svg');
+	background-image: linear-gradient(transparent, transparent), url('../images/display.svg');
+	background-size: 20px auto;
+	color: #252525;
+	padding-left: 26px;
+	cursor: pointer;
+}
+
+.uls-font-label, .uls-font-select {
+	font-size: 10pt;
+	line-height: 16pt;
+}
+
+.uls-font-select {
+	height: 16pt;
+}
+
+.uls-ui-languages button {
+	width: 23%;
+	text-overflow: ellipsis;
+	margin-right: 15px;
+	vertical-align: middle;
+}
+
+.uls-ui-languages button#uls-more-languages {
+	width: auto;
+}
+
+.uls-content-fonts, .uls-ui-fonts {
+	padding-top: 10px;
+}
+
+.uls-content-fonts:hover, .uls-ui-fonts:hover {
+	background-color: #F6F6F6;
+}
+
+.uls-font-label strong {
+	color: #252525;
+}
+
+.uls-font-label {
+	color: #555555;
+	font-size: 10pt;
+}

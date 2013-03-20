@@ -1,0 +1,184 @@
+.article-bg {
+	position: absolute;
+	top: 75px;
+	z-index: -1;
+	max-width: none;
+}
+
+.container {
+	margin-left: 0;
+	min-width: 958px;
+	position:relative;
+}
+
+.sidebar{
+	width: 160px;
+	float: left;
+	min-height: 1px;
+	margin-left: 20px;
+	background:#f8f8f8;
+}
+.header{
+	width: 100%;
+	min-height: 1px;
+	margin-left: 200px;
+	position: relative;
+}
+.personal {
+	float: right;
+	color:#0645AD;
+	height: 30px;
+	
+	font-size: 13px;
+	margin-bottom: 15px;
+	margin-right: 220px;
+	text-align: right;
+}
+
+.tabs {
+	position: relative;
+	float:left;
+	height: 30px;
+	min-width: 780px;
+	border-bottom: 1px solid #a7d7f9;
+
+}
+.tab-group:last-child {
+	float: right;
+}
+
+.tab {
+	color: #0645ad;
+	margin-top:8px;
+	height: 22px;
+	text-align: center;
+	border-right: 1px solid #a7d7f9;
+	margin-left: 0;
+	margin-right: 0;
+	font-size: 13px;
+	background: -webkit-linear-gradient(rgba(255,255,255,0), #edf7fd);
+	background: linear-gradient(rgba(255,255,255,0), #edf7fd);
+}
+.tab:first-child {
+	border-left: 1px solid #a7d7f9;	
+	background: white;
+}
+
+.tab.active {
+	color: #252525;
+	border-bottom: 1px solid white;
+	background: white;
+}
+
+.search {
+	text-align: right;
+	margin-left: 5px;
+	float: left;
+}
+
+input.searchbox {
+	position: relative;
+	top: 2px;
+	height: 15px;
+	margin:0;
+	width: 160px;
+	border-radius: 0px;
+	
+}
+
+.title, .motto {
+	color: #252525;
+	font-family: Georgia;
+	text-align: center;
+}
+
+.title {
+	font-size: 24px;
+	padding: 0 0 4px 0;
+}
+
+.logo {
+	background: transparent center bottom no-repeat;
+	background-image: url(../images/wikipedia-logo.png), -webkit-linear-gradient(white, #f8f8f8);
+	width: 160px;
+	height: 120px;
+	margin-top: 5px;
+}
+
+.toolbox {
+	padding: 15px 5px 0 15px;
+}
+
+.toolbox li {
+	color: #0645AD;
+	list-style-type: none;
+	font-size: 13px;
+	cursor: pointer;
+	padding: 2px 0;
+
+}
+
+.toolbox li:hover {
+	text-decoration: underline;
+}
+
+.toolbox ul {
+	margin: 0;	
+}
+
+.menu-group {
+	cursor: pointer;
+	padding-bottom: 3px;
+}
+
+.menu-group + ul li {
+	padding-left: 20px;
+	padding: 2px 0 0 20px;
+}
+
+.menu-group:before {
+	content: "";
+	display: inline-block;
+	border-top: 4px solid #555;
+	border-left: 4px solid transparent;
+	border-right: 4px solid transparent;
+	border-bottom: none;
+	vertical-align: middle;
+	margin: 4px;
+	
+}
+
+.menu-group.closed:before {
+	border-left: 4px solid #555;
+	border-top: 4px solid transparent;
+	border-bottom: 4px solid transparent;
+	border-right: none;
+	vertical-align: middle;
+	margin-right: 6px;
+	margin-left: 6px;
+	
+}
+
+
+.menu-group.closed + ul {
+	display: none;
+}
+.languages {
+	position: relative;
+}
+
+.language-settings {
+	display: inline-block;
+	position:absolute;
+	top: 4px;
+	right:0px;
+	height: 15px;
+	width: 30px;
+	background: transparent url(../images/cog.png) top right no-repeat;
+	cursor: pointer;
+	
+}
+
+.language-settings:hover {
+	background-image:  url(../images/cog-hi.png);
+}

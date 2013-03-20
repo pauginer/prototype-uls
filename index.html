@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="es">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>ULS prototype</title>
+		<link href="libs/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
+		<link rel="stylesheet" href="style/ext.uls.languagesettings.css">
+		<link rel="stylesheet" href="style/ext.uls.displaysettings.css">
+		<link rel="stylesheet" href="style/ext.uls.inputsettings.css">
+		<link rel="stylesheet" href="style/base.css">
+		<script src="libs/jquery.js"></script>
+   		<script src="libs/jquery.i18n.min.js"></script>
+		<script>
+		var article="lisa";
+		var langs = null;
+		var contentLang="en";
+		function loadArticleInfo(article){
+			$.getJSON('lang/'+article+'.json', function(data) {
+				langs=data.langs;
+				setArticleLang(contentLang);
+				createArticleLinks();
+			});
+			
+		}
+		
+		function createArticleLinks(){
+			var list=$(".language-list");
+			list.empty();
+			langs.forEach(function(lang){
+				var item= $('<li>');
+				item.text(lang.name);
+				item.attr('lang',lang.code);
+				item.click(interLanguageLink);
+				if(contentLang != lang.code){
+					list.append(item);
+				}
+			});
+		}
+		
+		function setArticleLang(lang){
+			var langcode = lang;
+			var filename="images/article-"+article+"-"+langcode+ ".png";
+			$('.article-bg').attr('src',filename);
+		}
+		
+		function interLanguageLink(){
+			$("body").hide();
+			var elt = $(this);
+		 	contentLang = elt.attr('lang');
+			
+			$('.language').show();
+			setArticleLang(contentLang);
+			createArticleLinks();
+			$("body").fadeIn();
+		
+		}
+		
+		
+		$( document ).ready( function() {
+			
+			//Process parameters:
+			
+			
+			//Create elements:
+			loadArticleInfo(article);
+			
+			//Callbacks:
+			$('.menu-group').click( function(){$(this).toggleClass('closed'); } );
+			
+		});
+		</script>
+	</head>
+	<body>
+		<div class="container">
+			<div class="row">
+				<div class="sidebar"> <!-- Sidebar -->
+					<div class="logo"></div>
+					<div class="title">Wikipedia</div>
+					<div class="motto">The free encyclopedia</div>
+					<div class="toolbox">
+						<div class="general">
+							
+						</div>
+						<div class="languages">
+							<div class="language-settings"></div>
+							<div class="menu-group language-menu">Languages</div>
+							<ul class="language-list">
+							</ul>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="header"> <!-- Headers -->
+					<div class="row">
+						<div class="personal">
+							<div class="span2">
+								Create account
+							</div>
+							<div class="span1">
+								Login
+							</div>
+						</div>
+						<div class="tabs">
+							<div class="tab-group">
+								<div class="span1 article tab active">
+									Article
+								</div>
+								<div class="span1 talk tab">
+									Talk
+								</div>
+							</div>
+							<div class="tab-group">
+								<div class="span1 read tab active">
+									Read
+								</div>
+								<div class="span2 source tab">
+									View source
+								</div>
+								<div class="span2 source tab">
+									View history
+								</div>
+								<div class=" search">
+									<input class="searchbox" type="text" placeholder="Search" />
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<img class="article-bg" src="images/article-lisa-en.png" width="958" height="7000"></img>
+	</body>
+</html>
