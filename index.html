@@ -12,132 +12,313 @@
 		<link rel="stylesheet" href="style/ext.uls.inputsettings.css">
 		<link rel="stylesheet" href="style/base.css">
 		<script src="libs/jquery.js"></script>
-   		<script src="libs/jquery.i18n.min.js"></script>
-   		<script src="libs/bootstrap/js/bootstrap.min.js"></script>
+		<script src="libs/jquery.i18n.min.js"></script>
+		<script src="libs/bootstrap/js/bootstrap.min.js"></script>
 		<script>
-		var article="lisa";
-		var langs = null;
-		var contentLang="en";
-		function loadArticleInfo(article){
-			$.getJSON('lang/'+article+'.json', function(data) {
-				langs=data.langs;
+			var article = "lisa";
+			var langs = null;
+			var contentLang = "en";
+			function loadArticleInfo(article) {
+				$.getJSON('lang/' + article + '.json', function(data) {
+					langs = data.langs;
+					setArticleLang(contentLang);
+					createArticleLinks();
+				});
+
+			}
+
+			function createArticleLinks() {
+				var list = $(".language-list");
+				list.empty();
+				langs.forEach(function(lang) {
+					var item = $('<li>');
+					item.text(lang.name);
+					item.attr('lang', lang.code);
+					item.click(interLanguageLink);
+					if (contentLang != lang.code) {
+						list.append(item);
+					}
+				});
+			}
+
+			function setArticleLang(lang) {
+				var langcode = lang;
+				var filename = "images/article-" + article + "-" + langcode + ".png";
+				$('.article-bg').attr('src', filename);
+			}
+
+			function interLanguageLink() {
+				$("body").hide();
+				var elt = $(this);
+				contentLang = elt.attr('lang');
+
+				$('.language').show();
 				setArticleLang(contentLang);
 				createArticleLinks();
+				$("body").fadeIn();
+
+			}
+
+			function toggleLanguageSettingsDialog() {
+				$('.language-settings-dialog').toggleClass('hidden');
+				$(this).toggleClass('active');
+			}
+
+			function closeLanguageSettingsDialog() {
+				$('.language-settings-dialog').addClass('hidden');
+				$('.language-settings').removeClass('active');
+			}
+			function openLanguageSettingsDialog() {
+				$('.language-settings-dialog').removeClass('hidden');
+				$('.language-settings').addClass('active');
+			}
+
+			function showInputSettings() {
+				openLanguageSettingsDialog();
+				$(".uls-display-settings").addClass('hidden');
+				$(".uls-input-settings").removeClass('hidden');
+				$(this).addClass('active');
+				$(".display-settings-block").removeClass('active');
+			}
+			
+			function showDisplaySettings() {
+				openLanguageSettingsDialog();
+				$(".uls-input-settings").addClass('hidden');
+				$(".uls-display-settings").removeClass('hidden');
+				$(this).addClass('active');
+				$(".input-settings-block").removeClass('active');
+			}
+
+
+			$(document).ready(function() {
+
+				//Process parameters:
+
+				//Create elements:
+				loadArticleInfo(article);
+
+				//Callbacks:
+				$('.menu-group').click(function() {
+					$(this).toggleClass('closed');
+				});
+				$('.language-settings').tooltip({
+					'placement' : 'right',
+					'delay' : {
+						show : 2000,
+						hide : 100
+					}
+				});
+				$('.language-settings').click(toggleLanguageSettingsDialog);
+				$('.uls-display-settings-cancel, #uls-displaysettings-apply, .icon-close').click(closeLanguageSettingsDialog);
+				$(".input-settings-block").click(showInputSettings);
+				$(".display-settings-block").click(showDisplaySettings);
 			});
-			
-		}
-		
-		function createArticleLinks(){
-			var list=$(".language-list");
-			list.empty();
-			langs.forEach(function(lang){
-				var item= $('<li>');
-				item.text(lang.name);
-				item.attr('lang',lang.code);
-				item.click(interLanguageLink);
-				if(contentLang != lang.code){
-					list.append(item);
-				}
-			});
-		}
-		
-		function setArticleLang(lang){
-			var langcode = lang;
-			var filename="images/article-"+article+"-"+langcode+ ".png";
-			$('.article-bg').attr('src',filename);
-		}
-		
-		function interLanguageLink(){
-			$("body").hide();
-			var elt = $(this);
-		 	contentLang = elt.attr('lang');
-			
-			$('.language').show();
-			setArticleLang(contentLang);
-			createArticleLinks();
-			$("body").fadeIn();
-		
-		}
-		
-		function toggleLanguageSettingsDialog(){
-			$('.language-settings-dialog').toggleClass('hidden');
-			$(this).toggleClass('active'); 
-		}
-		
-		$( document ).ready( function() {
-			
-			//Process parameters:
-			
-			
-			//Create elements:
-			loadArticleInfo(article);
-			
-			//Callbacks:
-			$('.menu-group').click( function(){$(this).toggleClass('closed'); } );
-			$('.language-settings').tooltip({'placement':'right', 'delay': { show: 2000, hide: 100 }});
-			$('.language-settings').click(toggleLanguageSettingsDialog);
-		});
 		</script>
 	</head>
 	<body>
 		<div class="container">
 			<div class="row">
-				<div class="sidebar"> <!-- Sidebar -->
+				<div class="sidebar">
+					<!-- Sidebar -->
 					<div class="logo"></div>
-					<div class="title">Wikipedia</div>
-					<div class="motto">The free encyclopedia</div>
+					<div class="title">
+						Wikipedia
+					</div>
+					<div class="motto">
+						The free encyclopedia
+					</div>
 					<div class="toolbox">
 						<div class="general">
 							<ul>
-								<li>Main page</li>
-								<li>Contents</li>
-								<li>Featured content</li>
-								<li>Current events</li>
-								<li>Random article</li>
-								<li>Donate to Wikipedia</li>
+								<li>
+									Main page
+								</li>
+								<li>
+									Contents
+								</li>
+								<li>
+									Featured content
+								</li>
+								<li>
+									Current events
+								</li>
+								<li>
+									Random article
+								</li>
+								<li>
+									Donate to Wikipedia
+								</li>
 							</ul>
-							<div class="menu-group interaction-menu">Interaction</div>
-							<ul>								
-								<li>Help</li>
-								<li>About Wikipedia</li>
-								<li>Community portal</li>
-								<li>Recent changes</li>
-								<li>Contact wikipedia</li>
-							</ul>	
-							<div class="menu-group toolbox-menu">Toolbox</div>
-							<ul>								
-								<li>What links here</li>
-								<li>Related changes</li>
-								<li>Upload file</li>
-								<li>Special pages</li>
-								<li>Permanent link</li>
-								<li>Page information</li>
-								<li>Cite this page</li>
-							</ul>
-							<div class="menu-group closed export-menu">Print/Export</div>
-							<ul>					
-								<li>Create a book</li>
-								<li>Download as PDF</li>
-								<li>Printable version</li>
-							</ul>
+							<div class="menu-group interaction-menu">
+								Interaction
 							</div>
-							
+							<ul>
+								<li>
+									Help
+								</li>
+								<li>
+									About Wikipedia
+								</li>
+								<li>
+									Community portal
+								</li>
+								<li>
+									Recent changes
+								</li>
+								<li>
+									Contact wikipedia
+								</li>
+							</ul>
+							<div class="menu-group toolbox-menu">
+								Toolbox
+							</div>
+							<ul>
+								<li>
+									What links here
+								</li>
+								<li>
+									Related changes
+								</li>
+								<li>
+									Upload file
+								</li>
+								<li>
+									Special pages
+								</li>
+								<li>
+									Permanent link
+								</li>
+								<li>
+									Page information
+								</li>
+								<li>
+									Cite this page
+								</li>
+							</ul>
+							<div class="menu-group closed export-menu">
+								Print/Export
+							</div>
+							<ul>
+								<li>
+									Create a book
+								</li>
+								<li>
+									Download as PDF
+								</li>
+								<li>
+									Printable version
+								</li>
+							</ul>
+						</div>
+
 						<div class="languages">
 							<div class="language-settings" data-toggle="tooltip" title="Language settings"></div>
 							<div class="uls-position">
-								
-								<div  id="language-settings-dialog" class="hidden grid uls-menu uls-wide language-settings-dialog"><div class="row"><span id="languagesettings-close" class="icon-close"></span></div><div class="row" id="languagesettings-panels"><div class="four columns languagesettings-menu"><h1 data-i18n="ext-uls-language-settings-title">Language settings</h1><div class="settings-menu-items"><div class="display-settings-block menu-section active" id="display-settings-block"><div class="settings-title">Display</div><span class="settings-text">Set language used for menus and fonts.</span></div><div class="input-settings-block menu-section" id="input-settings-block"><div class="settings-title">Input</div><span class="settings-text">Writing in a different language?</span></div></div></div><div id="languagesettings-settings-panel" class="eight columns"><div class="uls-display-settings"><div class="row"><div class="twelve columns"><h3 data-i18n="ext-uls-display-settings-title">Display settings</h3></div></div><div class="row"><div class="eleven columns"><h4 data-i18n="ext-uls-display-settings-ui-language">Language for display</h4></div></div><div class="row"><div class="uls-ui-languages eleven columns"><button class="button uls-language-button down" lang="en" dir="ltr">English</button><button class="button uls-language-button" lang="ca" dir="ltr">català</button><button class="button uls-language-button" lang="es" dir="ltr">español</button><button id="uls-more-languages" class="button">...</button></div></div><div class="row"><div class="twelve columns"><h4 data-i18n="ext-uls-display-settings-font-settings">Font settings</h4></div></div><div class="row"><div class="eleven columns"><label class="checkbox"><input type="checkbox" id="webfonts-enable-checkbox"><strong data-i18n="ext-uls-webfonts-settings-title">Download font when needed</strong> <span data-i18n="ext-uls-webfonts-settings-info">Webfonts will be downloaded for displaying text in special scripts.</span> <a target="_blank" href="//www.mediawiki.org/wiki/Special:MyLanguage/Help:Extension:WebFonts" data-i18n="ext-uls-webfonts-settings-info-link">More information</a></label></div></div><div class="row uls-content-fonts" style=""><div class="six columns"><label class="uls-font-label" id="content-font-selector-label"><strong>Select font for English</strong><div data-i18n="ext-uls-webfonts-select-for-content-info">Font used for content</div></label></div><select id="content-font-selector" class="four columns end uls-font-select"><option value="OpenDyslexic">OpenDyslexic</option><option value="system" selected="selected">System font</option></select></div><div class="row uls-ui-fonts" style="display: none;"><div class="six columns"><label class="uls-font-label" id="ui-font-selector-label"></label></div><select id="ui-font-selector" class="four columns end uls-font-select"></select></div><div class="row"></div><div class="row language-settings-buttons"><div class="eleven columns"><button class="button uls-display-settings-cancel" data-i18n="ext-uls-language-settings-cancel">Cancel</button><button class="button active blue" id="uls-displaysettings-apply" data-i18n="ext-uls-language-settings-apply" disabled="">Apply settings</button></div></div></div></div></div></div>
-							
-							</div>	
-							<div class="menu-group language-menu">Languages</div>
-							<ul class="language-list">
-							</ul>
+
+								<div  id="language-settings-dialog" class="hidden grid uls-menu uls-wide language-settings-dialog">
+									<div class="row">
+										<span id="languagesettings-close" class="icon-close"></span>
+									</div>
+									<div class="row" id="languagesettings-panels">
+										<div class="four columns languagesettings-menu">
+											<h1 data-i18n="ext-uls-language-settings-title">Language settings</h1>
+											<div class="settings-menu-items">
+												<div class="display-settings-block menu-section active" id="display-settings-block">
+													<div class="settings-title">
+														Display
+													</div><span class="settings-text">Set language used for menus and fonts.</span>
+												</div>
+												<div class="input-settings-block menu-section" id="input-settings-block">
+													<div class="settings-title">
+														Input
+													</div><span class="settings-text">Writing in a different language?</span>
+												</div>
+											</div>
+										</div>
+										<div id="languagesettings-settings-panel" class="eight columns">
+											<div class="uls-display-settings">
+												<div class="row">
+													<div class="twelve columns">
+														<h3 data-i18n="ext-uls-display-settings-title">Display settings</h3>
+													</div>
+												</div>
+												<div class="row">
+													<div class="eleven columns">
+														<h4 data-i18n="ext-uls-display-settings-ui-language">Language for display</h4>
+													</div>
+												</div>
+												<div class="row">
+													<div class="uls-ui-languages eleven columns">
+														<button class="button uls-language-button down" lang="en" dir="ltr">
+															English
+														</button>
+														<button class="button uls-language-button" lang="ca" dir="ltr">
+															català
+														</button>
+														<button class="button uls-language-button" lang="es" dir="ltr">
+															español
+														</button>
+														<button id="uls-more-languages" class="button">
+															...
+														</button>
+													</div>
+												</div>
+												<div class="row">
+													<div class="twelve columns">
+														<h4 data-i18n="ext-uls-display-settings-font-settings">Font settings</h4>
+													</div>
+												</div>
+												<div class="row">
+													<div class="eleven columns">
+														<label class="checkbox">
+															<input type="checkbox" id="webfonts-enable-checkbox">
+															<strong data-i18n="ext-uls-webfonts-settings-title">Download font when needed</strong> <span data-i18n="ext-uls-webfonts-settings-info">Webfonts will be downloaded for displaying text in special scripts.</span> <a target="_blank" href="//www.mediawiki.org/wiki/Special:MyLanguage/Help:Extension:WebFonts" data-i18n="ext-uls-webfonts-settings-info-link">More information</a></label>
+													</div>
+												</div>
+												<div class="row uls-content-fonts" style="">
+													<div class="six columns">
+														<label class="uls-font-label" id="content-font-selector-label"><strong>Select font for English</strong>
+															<div data-i18n="ext-uls-webfonts-select-for-content-info">
+																Font used for content
+															</div></label>
+													</div>
+													<select id="content-font-selector" class="four columns end uls-font-select">
+														<option value="OpenDyslexic">OpenDyslexic</option><option value="system" selected="selected">System font</option>
+													</select>
+												</div>
+												<div class="row uls-ui-fonts" style="display: none;">
+													<div class="six columns">
+														<label class="uls-font-label" id="ui-font-selector-label"></label>
+													</div><select id="ui-font-selector" class="four columns end uls-font-select"></select>
+												</div><div class="row"></div>
+												<div class="row language-settings-buttons">
+													<div class="eleven columns">
+														<button class="button uls-display-settings-cancel" data-i18n="ext-uls-language-settings-cancel">
+															Cancel
+														</button>
+														<button class="button active blue" id="uls-displaysettings-apply" data-i18n="ext-uls-language-settings-apply" disabled="">
+															Apply settings
+														</button>
+													</div>
+												</div>
+											</div>
+											<div class="uls-input-settings hidden"><div class="row"><div class="twelve columns"><h3 data-i18n="ext-uls-input-settings-title">Input settings</h3></div></div><div class="row uls-input-settings-languages-title" style=""><div class="eleven columns"><h4 data-i18n="ext-uls-input-settings-ui-language">Language used for writing</h4></div></div><div class="row"><div class="uls-ui-languages eleven columns" style=""><button class="button uls-language-button down" lang="en" dir="ltr">English</button><span class="uls-input-settings-caret"></span><button class="button uls-language-button" lang="ca" dir="ltr">català</button><span class="uls-input-settings-caret"></span><button class="button uls-language-button" lang="es" dir="ltr">español</button><span class="uls-input-settings-caret"></span><button id="uls-more-languages" class="button">...</button></div></div><div class="row"><div class="eleven columns uls-input-settings-inputmethods-list" style=""><h4 class="ext-uls-input-settings-imes-title">Input methods for English</h4><label for="ipa-sil" class="imelabel"><input type="radio" name="ime" id="ipa-sil" value="ipa-sil"><strong>International Phonetic Alphabet - SIL</strong><span></span></label><label for="system" class="imelabel"><input type="radio" name="ime" id="system" value="system" checked="checked"><strong>Disable input method</strong><span>Use a regular keyboard</span></label></div></div><div class="row"><div class="eleven columns button uls-input-settings-disable-info" style="display: none;"></div><div class="six columns button uls-input-settings-toggle"><button class="active green button uls-input-toggle-button">Disable input method tools</button></div></div><div class="row"></div><div class="row language-settings-buttons"><div class="eleven columns"><button class="button uls-input-settings-cancel" data-i18n="ext-uls-language-settings-cancel">Cancel</button><button class="active blue button uls-input-settings-apply" data-i18n="ext-uls-language-settings-apply">Apply settings</button></div></div></div>
+										</div>
+									</div>
+								</div>
+
+							</div>
+							<div class="menu-group language-menu">
+								Languages
+							</div>
+							<ul class="language-list"></ul>
 						</div>
-						
+
 					</div>
-					
+
 				</div>
-				<div class="header"> <!-- Headers -->
+				<div class="header">
+					<!-- Headers -->
 					<div class="row">
 						<div class="personal">
 							<div class="span2">
