@@ -129,6 +129,9 @@ input.searchbox {
 .menu-group {
 	cursor: pointer;
 	padding-bottom: 3px;
+	padding-top: 3px;
+	margin-top: 3px;
+	border-top: 1px solid #EEE;
 }
 
 .menu-group + ul li {
@@ -174,8 +177,9 @@ input.searchbox {
 	right:0px;
 	height: 15px;
 	width: 30px;
-	background: transparent url(../images/cog.png) top right no-repeat;
+	background: transparent url(../images/cog.png) center right no-repeat;
 	cursor: pointer;
+	padding:3px;
 	
 }
 
