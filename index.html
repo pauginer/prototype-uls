@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -58,6 +58,7 @@
 				$('.language').show();
 				setArticleLang(contentLang);
 				createArticleLinks();
+				changeUILanguage(contentLang);
 				$("body").fadeIn();
 
 			}
@@ -91,13 +92,21 @@
 				$(this).addClass('active');
 				$(".input-settings-block").removeClass('active');
 			}
+			
+			function changeUILanguage(lang){
+				 $.i18n().locale=lang;
+				 $("*[data-i18n]").each(function(i,elt){
+					var key = $(elt).attr("data-i18n");
+					var value = $.i18n(key);
+				 	$(elt).text(value);
+				 });
+			}
 
 
 			$(document).ready(function() {
 
 				//Process parameters:
 				
-				$.i18n.locale="es";
 				//Create elements:
 				loadArticleInfo(article);
 
