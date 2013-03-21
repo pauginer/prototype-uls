@@ -183,6 +183,39 @@ input.searchbox {
 	
 }
 
+.language-settings.active,
 .language-settings:hover {
 	background-image:  url(../images/cog-hi.png);
+}
+
+.language-settings-dialog {
+	display: block; 
+	top: -40px;
+	left: 160px;
+}
+
+.language-settings-dialog:before {
+	display: inline-block;
+	content: "";
+	border-right: 20px solid #AAA;
+	border-top: 20px solid transparent;
+	border-bottom: 20px solid transparent;
+	left: -20px;
+	top: 32px;
+	position: absolute;
+}
+
+.language-settings-dialog:after {
+	display: inline-block;
+	content: "";
+	border-right: 20px solid white;
+	border-top: 20px solid transparent;
+	border-bottom: 20px solid transparent;
+	left: -19px;
+	top: 32px;
+	position: absolute;
+}
+
+.hidden {
+	display: none !important;
 }
