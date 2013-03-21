@@ -4,6 +4,8 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<title>ULS prototype</title>
+		<link rel="localization" hreflang="en" href="lang/en.json" type="application/l10n+json"/>
+		<link rel="localization" hreflang="es" href="lang/es.json" type="application/l10n+json"/>
 		<link href="libs/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
 		<link rel="stylesheet" href="style/jquery.uls.css">
 		<link rel="stylesheet" href="style/ext.uls.css">
@@ -12,7 +14,7 @@
 		<link rel="stylesheet" href="style/ext.uls.inputsettings.css">
 		<link rel="stylesheet" href="style/base.css">
 		<script src="libs/jquery.js"></script>
-		<script src="libs/jquery.i18n.min.js"></script>
+		<script src="libs/jquery.i18n.js"></script>
 		<script src="libs/bootstrap/js/bootstrap.min.js"></script>
 		<script>
 			var article = "lisa";
@@ -93,7 +95,8 @@
 			$(document).ready(function() {
 
 				//Process parameters:
-
+				
+				$.i18n.locale="es";
 				//Create elements:
 				loadArticleInfo(article);
 
@@ -104,14 +107,17 @@
 				$('.language-settings').tooltip({
 					'placement' : 'right',
 					'delay' : {
-						show : 2000,
-						hide : 100
+						show : 1000,
+						hide : 50
 					}
 				});
 				$('.language-settings').click(toggleLanguageSettingsDialog);
 				$('.uls-display-settings-cancel, #uls-displaysettings-apply, .icon-close').click(closeLanguageSettingsDialog);
 				$(".input-settings-block").click(showInputSettings);
 				$(".display-settings-block").click(showDisplaySettings);
+				
+				//Translate
+				$(document).i18n();
 			});
 		</script>
 	</head>
@@ -213,6 +219,7 @@
 
 						<div class="languages">
 							<div class="language-settings" data-toggle="tooltip" title="Language settings"></div>
+							<!-- ULS -->
 							<div class="uls-position">
 
 								<div  id="language-settings-dialog" class="hidden grid uls-menu uls-wide language-settings-dialog">
@@ -308,7 +315,7 @@
 								</div>
 
 							</div>
-							<div class="menu-group language-menu">
+							<div class="menu-group language-menu" data-i18n="languages-menu">
 								Languages
 							</div>
 							<ul class="language-list"></ul>
