@@ -396,71 +396,76 @@
 											</div>
 										</div>
 										<div id="languagesettings-settings-panel" class="eight columns">
-											<div class="uls-display-settings">
+											<div class="uls-display-settings-block">
 												<div class="row">
 													<div class="twelve columns">
 														<h3 data-i18n="ext-uls-display-settings-title">Display settings</h3>
 													</div>
 												</div>
-												<div class="row">
-													<div class="eleven columns">
-														<h4 data-i18n="ext-uls-display-settings-ui-language">Language for display</h4>
+												<div class="ui-language-settings">
+													<div class="row">
+														<div class="eleven columns">
+															<h4 data-i18n="ext-uls-display-settings-ui-language">Language for display</h4>
+														</div>
+													</div>
+													<div class="row">
+														<div class="uls-ui-languages eleven columns">
+															<button class="button uls-language-button down" lang="en" dir="ltr">
+																English
+															</button>
+															<button class="button uls-language-button" lang="ca" dir="ltr">
+																català
+															</button>
+															<button class="button uls-language-button" lang="es" dir="ltr">
+																español
+															</button>
+															<button id="uls-more-languages" class="button">
+																...
+															</button>
+														</div>
 													</div>
 												</div>
-												<div class="row">
-													<div class="uls-ui-languages eleven columns">
-														<button class="button uls-language-button down" lang="en" dir="ltr">
-															English
-														</button>
-														<button class="button uls-language-button" lang="ca" dir="ltr">
-															català
-														</button>
-														<button class="button uls-language-button" lang="es" dir="ltr">
-															español
-														</button>
-														<button id="uls-more-languages" class="button">
-															...
-														</button>
+													
+												<div class="font-settings-block">
+													<div class="row">
+														<div class="twelve columns">
+															<h4 data-i18n="ext-uls-display-settings-font-settings">Font settings</h4>
+														</div>
 													</div>
-												</div>
-												<div class="row">
-													<div class="twelve columns">
-														<h4 data-i18n="ext-uls-display-settings-font-settings">Font settings</h4>
+													<div class="row">
+														<div class="eleven columns">
+															<label class="checkbox">
+																<input type="checkbox" id="webfonts-enable-checkbox">
+																<strong data-i18n="ext-uls-webfonts-settings-title">Download font when needed</strong> <span data-i18n="ext-uls-webfonts-settings-info">Webfonts will be downloaded for displaying text in special scripts.</span> <a target="_blank" href="//www.mediawiki.org/wiki/Special:MyLanguage/Help:Extension:WebFonts" data-i18n="ext-uls-webfonts-settings-info-link">More information</a></label>
+														</div>
 													</div>
-												</div>
-												<div class="row">
-													<div class="eleven columns">
-														<label class="checkbox">
-															<input type="checkbox" id="webfonts-enable-checkbox">
-															<strong data-i18n="ext-uls-webfonts-settings-title">Download font when needed</strong> <span data-i18n="ext-uls-webfonts-settings-info">Webfonts will be downloaded for displaying text in special scripts.</span> <a target="_blank" href="//www.mediawiki.org/wiki/Special:MyLanguage/Help:Extension:WebFonts" data-i18n="ext-uls-webfonts-settings-info-link">More information</a></label>
+													<div class="row uls-content-fonts" style="">
+														<div class="six columns">
+															<label class="uls-font-label" id="content-font-selector-label"><strong>Select font for English</strong>
+																<div data-i18n="ext-uls-webfonts-select-for-content-info">
+																	Font used for content
+																</div></label>
+														</div>
+														<select id="content-font-selector" class="four columns end uls-font-select">
+															<option value="OpenDyslexic">OpenDyslexic</option><option value="system" selected="selected">System font</option>
+														</select>
 													</div>
-												</div>
-												<div class="row uls-content-fonts" style="">
-													<div class="six columns">
-														<label class="uls-font-label" id="content-font-selector-label"><strong>Select font for English</strong>
-															<div data-i18n="ext-uls-webfonts-select-for-content-info">
-																Font used for content
-															</div></label>
+													<div class="row uls-ui-fonts" style="display: none;">
+														<div class="six columns">
+															<label class="uls-font-label" id="ui-font-selector-label"></label>
+														</div><select id="ui-font-selector" class="four columns end uls-font-select"></select>
 													</div>
-													<select id="content-font-selector" class="four columns end uls-font-select">
-														<option value="OpenDyslexic">OpenDyslexic</option><option value="system" selected="selected">System font</option>
-													</select>
-												</div>
-												<div class="row uls-ui-fonts" style="display: none;">
-													<div class="six columns">
-														<label class="uls-font-label" id="ui-font-selector-label"></label>
-													</div><select id="ui-font-selector" class="four columns end uls-font-select"></select>
-												</div><div class="row"></div>
-												<div class="row language-settings-buttons">
-													<div class="eleven columns">
-														<button class="button uls-display-settings-cancel" data-i18n="ext-uls-language-settings-cancel">
-															Cancel
-														</button>
-														<button class="button active blue" id="uls-displaysettings-apply" data-i18n="ext-uls-language-settings-apply" disabled="">
-															Apply settings
-														</button>
+													</div><div class="row"></div>
+													<div class="row language-settings-buttons">
+														<div class="eleven columns">
+															<button class="button uls-display-settings-cancel" data-i18n="ext-uls-language-settings-cancel">
+																Cancel
+															</button>
+															<button class="button active blue" id="uls-displaysettings-apply" data-i18n="ext-uls-language-settings-apply" disabled="">
+																Apply settings
+															</button>
+														</div>
 													</div>
-												</div>
 											</div>
 											<div class="uls-input-settings hidden"><div class="row"><div class="twelve columns"><h3 data-i18n="ext-uls-input-settings-title">Input settings</h3></div></div><div class="row uls-input-settings-languages-title" style=""><div class="eleven columns"><h4 data-i18n="ext-uls-input-settings-ui-language">Language used for writing</h4></div></div><div class="row"><div class="uls-ui-languages eleven columns" style=""><button class="button uls-language-button down" lang="en" dir="ltr">English</button><span class="uls-input-settings-caret"></span><button class="button uls-language-button" lang="ca" dir="ltr">català</button><span class="uls-input-settings-caret"></span><button class="button uls-language-button" lang="es" dir="ltr">español</button><span class="uls-input-settings-caret"></span><button id="uls-more-languages" class="button">...</button></div></div><div class="row"><div class="eleven columns uls-input-settings-inputmethods-list" style=""><h4 class="ext-uls-input-settings-imes-title">Input methods for English</h4><label for="ipa-sil" class="imelabel"><input type="radio" name="ime" id="ipa-sil" value="ipa-sil"><strong>International Phonetic Alphabet - SIL</strong><span></span></label><label for="system" class="imelabel"><input type="radio" name="ime" id="system" value="system" checked="checked"><strong>Disable input method</strong><span>Use a regular keyboard</span></label></div></div><div class="row"><div class="eleven columns button uls-input-settings-disable-info" style="display: none;"></div><div class="six columns button uls-input-settings-toggle"><button class="active green button uls-input-toggle-button">Disable input method tools</button></div></div><div class="row"></div><div class="row language-settings-buttons"><div class="eleven columns"><button class="button uls-input-settings-cancel" data-i18n="ext-uls-language-settings-cancel">Cancel</button><button class="active blue button uls-input-settings-apply" data-i18n="ext-uls-language-settings-apply">Apply settings</button></div></div></div>
 										</div>
