@@ -4,9 +4,36 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<title>ULS prototype</title>
+		<!--UI localisation: -->
 		<link rel="localization" hreflang="en" href="lang/en.json" type="application/l10n+json"/>
-		<link rel="localization" hreflang="es" href="lang/es.json" type="application/l10n+json"/>
+		<link rel="localization" hreflang="af" href="lang/af.json" type="application/l10n+json"/>
+		<link rel="localization" hreflang="am" href="lang/am.json" type="application/l10n+json"/>
+		<link rel="localization" hreflang="ar" href="lang/ar.json" type="application/l10n+json"/>
+		<link rel="localization" hreflang="be" href="lang/be.json" type="application/l10n+json"/>
+		<link rel="localization" hreflang="be-x-old" href="lang/be-x-old.json" type="application/l10n+json"/>
+		<link rel="localization" hreflang="bg" href="lang/bg.json" type="application/l10n+json"/>
+		<link rel="localization" hreflang="bn" href="lang/bn.json" type="application/l10n+json"/>
+		<link rel="localization" hreflang="bo" href="lang/bo.json" type="application/l10n+json"/>
+		<link rel="localization" hreflang="br" href="lang/br.json" type="application/l10n+json"/>
+		<link rel="localization" hreflang="bs" href="lang/bs.json" type="application/l10n+json"/>
 		<link rel="localization" hreflang="ca" href="lang/ca.json" type="application/l10n+json"/>
+		<link rel="localization" hreflang="cbk-zam" href="lang/cbk-zam.json" type="application/l10n+json"/>
+		<link rel="localization" hreflang="cs" href="lang/cs.json" type="application/l10n+json"/>
+		<link rel="localization" hreflang="cy" href="lang/cy.json" type="application/l10n+json"/>
+		<link rel="localization" hreflang="da" href="lang/da.json" type="application/l10n+json"/>
+		<link rel="localization" hreflang="de" href="lang/de.json" type="application/l10n+json"/>
+		<link rel="localization" hreflang="el" href="lang/el.json" type="application/l10n+json"/>
+		<link rel="localization" hreflang="et" href="lang/et.json" type="application/l10n+json"/>		
+		<link rel="localization" hreflang="eo" href="lang/eo.json" type="application/l10n+json"/>
+		<link rel="localization" hreflang="eu" href="lang/eu.json" type="application/l10n+json"/>
+		<link rel="localization" hreflang="fa" href="lang/fa.json" type="application/l10n+json"/>
+		
+		
+		<link rel="localization" hreflang="es" href="lang/es.json" type="application/l10n+json"/>
+		<!-- ULS Localisation: -->
+		<link rel="localization" hreflang="en" href="lang/uls/en.json" type="application/l10n+json"/>
+		<link rel="localization" hreflang="es" href="lang/uls/es.json" type="application/l10n+json"/>
+		
 		<link href="libs/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
 		<link rel="stylesheet" href="style/jquery.uls.css">
 		<link rel="stylesheet" href="style/ext.uls.css">
@@ -137,91 +164,91 @@
 				<div class="sidebar">
 					<!-- Sidebar -->
 					<div class="logo"></div>
-					<div class="title">
+					<div class="title" data-i18n="sitename">
 						Wikipedia
 					</div>
-					<div class="motto">
+					<div class="motto" data-i18n="motto">
 						The free encyclopedia
 					</div>
 					<div class="toolbox">
 						<div class="general">
 							<ul>
-								<li>
+								<li data-i18n="n-mainpage-description">
 									Main page
 								</li>
-								<li>
+								<li data-i18n="n-contents">
 									Contents
 								</li>
-								<li>
+								<li data-i18n="n-featuredcontent">
 									Featured content
 								</li>
-								<li>
+								<li data-i18n="n-currentevents">
 									Current events
 								</li>
-								<li>
+								<li data-i18n="n-randompage">
 									Random article
 								</li>
-								<li>
+								<li data-i18n="n-sitesupport">
 									Donate to Wikipedia
 								</li>
 							</ul>
-							<div class="menu-group interaction-menu">
+							<div class="menu-group interaction-menu" data-i18n="p-interaction">
 								Interaction
 							</div>
 							<ul>
-								<li>
+								<li data-i18n="n-help">
 									Help
 								</li>
-								<li>
+								<li data-i18n="n-aboutsite">
 									About Wikipedia
 								</li>
-								<li>
+								<li data-i18n="n-portal">
 									Community portal
 								</li>
-								<li>
+								<li data-i18n="n-recentchanges">
 									Recent changes
 								</li>
-								<li>
+								<li data-i18n="n-contact">
 									Contact wikipedia
 								</li>
 							</ul>
-							<div class="menu-group toolbox-menu">
+							<div class="menu-group toolbox-menu" data-i18n="p-tb">
 								Toolbox
 							</div>
 							<ul>
-								<li>
+								<li data-i18n="t-whatlinkshere">
 									What links here
 								</li>
-								<li>
+								<li data-i18n="t-recentchangeslinked">
 									Related changes
 								</li>
-								<li>
+								<li data-i18n="n-upload">
 									Upload file
 								</li>
-								<li>
+								<li data-i18n="t-specialpages">
 									Special pages
 								</li>
-								<li>
+								<li data-i18n="t-permalink">
 									Permanent link
 								</li>
-								<li>
+								<li data-i18n="t-info">
 									Page information
 								</li>
-								<li>
+								<li data-i18n="t-cite">
 									Cite this page
 								</li>
 							</ul>
-							<div class="menu-group closed export-menu">
+							<div class="menu-group closed export-menu" data-i18n="p-coll-print_export">
 								Print/Export
 							</div>
 							<ul>
-								<li>
+								<li data-i18n="coll-create_a_book">
 									Create a book
 								</li>
-								<li>
+								<li data-i18n="coll-download-as-rl">
 									Download as PDF
 								</li>
-								<li>
+								<li data-i18n="t-print">
 									Printable version
 								</li>
 							</ul>
@@ -325,7 +352,7 @@
 								</div>
 
 							</div>
-							<div class="menu-group language-menu" data-i18n="languages-menu">
+							<div class="menu-group language-menu" data-i18n="p-lang">
 								Languages
 							</div>
 							<ul class="language-list"></ul>
@@ -338,30 +365,30 @@
 					<!-- Headers -->
 					<div class="row">
 						<div class="personal">
-							<div class="span2">
+							<div class="span2" data-i18n="pt-createaccount">
 								Create account
 							</div>
-							<div class="span1">
+							<div class="span1" data-i18n="pt-login">
 								Login
 							</div>
 						</div>
 						<div class="tabs">
 							<div class="tab-group">
-								<div class="span1 article tab active">
+								<div class="span1 article tab active" data-i18n="ca-nstab-main">
 									Article
 								</div>
-								<div class="span1 talk tab">
+								<div class="span1 talk tab" data-i18n="ca-talk">
 									Talk
 								</div>
 							</div>
 							<div class="tab-group">
-								<div class="span1 read tab active">
+								<div class="span1 read tab active" data-i18n="ca-view">
 									Read
 								</div>
-								<div class="span2 source tab">
+								<div class="span2 source tab" data-i18n="ca-viewsource">
 									View source
 								</div>
-								<div class="span2 source tab">
+								<div class="span2 source tab" data-i18n="ca-history">
 									View history
 								</div>
 								<div class=" search">
