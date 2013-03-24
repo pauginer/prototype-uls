@@ -221,3 +221,22 @@ input.searchbox {
 	display: none !important;
 }
 
+
+.ui-language-settings {
+	padding-bottom: 25px;
+	margin-bottom: 2px;
+	border-bottom: 1px solid #F0F0F0;
+}
+
+.ui-change-clarification {
+	margin: 0 0 10px 0;
+	color: #555;
+	font-size: 13px;
+}
+.checkbox {
+	padding: 0;
+}
+
+.checkbox input {
+	margin-right: 5px;
+}

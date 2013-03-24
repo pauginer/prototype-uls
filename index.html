@@ -154,9 +154,14 @@
 		<script src="libs/jquery.i18n.js"></script>
 		<script src="libs/bootstrap/js/bootstrap.min.js"></script>
 		<script>
-			var article = "lisa";
+			var articles = ["lisa", "memory"];
+			var article = articles[0];
 			var langs = null;
-			var contentLang = "en";
+			var defaultLang = "en";
+			var contentLang = null;
+			var uiLang = null;
+			var previousUILang=null;
+			
 			function loadArticleInfo(article) {
 				$.getJSON('lang/article/' + article + '.json', function(data) {
 					langs = data.langs;
@@ -215,7 +220,7 @@
 
 			function showInputSettings() {
 				openLanguageSettingsDialog();
-				$(".uls-display-settings").addClass('hidden');
+				$(".uls-display-settings-block").addClass('hidden');
 				$(".uls-input-settings").removeClass('hidden');
 				$(this).addClass('active');
 				$(".display-settings-block").removeClass('active');
@@ -224,7 +229,7 @@
 			function showDisplaySettings() {
 				openLanguageSettingsDialog();
 				$(".uls-input-settings").addClass('hidden');
-				$(".uls-display-settings").removeClass('hidden');
+				$(".uls-display-settings-block").removeClass('hidden');
 				$(this).addClass('active');
 				$(".input-settings-block").removeClass('active');
 			}
@@ -237,12 +242,53 @@
 				 	$(elt).text(value);
 				 });
 			}
-
+			
+			function changeUiLangAction(){
+				var lang = $(this).attr("lang");
+				$( ".uls-language-button.down",$(this).parent()).removeClass("down");
+				$(this).addClass("down");
+				changeUILanguage(lang);
+				$("#uls-displaysettings-apply").removeAttr("disabled");
+				 previousUiLang = uiLang;
+				 uiLang = lang;
+			}
+			
+			function cancelUiLangAction(){
+				if (previousUiLang != null){
+					uiLang = previousUiLang;
+					previousUiLang = null;
+					changeUILanguage(uiLang);
+					$( ".ui-language-settings .uls-language-button").removeClass("down");
+					$( ".ui-language-settings .uls-language-button[lang='"+uiLang+"']").addClass("down");
+				}
+			}
+			
 
 			$(document).ready(function() {
 
 				//Process parameters:
+				var hash = window.location.hash;
+				var args=hash.replace('#','').split('-');
+				args.forEach(function(e){
 				
+					//Langs:
+					if(e.length==2){
+						if(contentLang == null)	{
+							contentLang = e;
+						}else if (uiLang == null) {
+							uiLang = e;
+						}
+					}
+					//Article:
+					if($.inArray(e, articles)>0){
+						article = e;
+					}
+				
+				});
+				
+				//Set defaults
+				if(contentLang == null)	{ contentLang = defaultLang; }
+				if(uiLang == null)	{ uiLang = contentLang; }
 				//Create elements:
 				loadArticleInfo(article);
 
@@ -261,6 +307,8 @@
 				$('.uls-display-settings-cancel, #uls-displaysettings-apply, .icon-close').click(closeLanguageSettingsDialog);
 				$(".input-settings-block").click(showInputSettings);
 				$(".display-settings-block").click(showDisplaySettings);
+				$(".ui-language-settings .uls-language-button").click(changeUiLangAction);
+				$(".uls-display-settings-cancel").click(cancelUiLangAction);
 				
 				$( 'html' ).click( function () {
 					closeLanguageSettingsDialog();
@@ -407,6 +455,9 @@
 														<div class="eleven columns">
 															<h4 data-i18n="ext-uls-display-settings-ui-language">Language for display</h4>
 														</div>
+													</div>
+													<div class="row">
+														<div class="twelve columns ui-change-clarification">Change the language of menus (content language will not be affected).</div>
 													</div>
 													<div class="row">
 														<div class="uls-ui-languages eleven columns">
