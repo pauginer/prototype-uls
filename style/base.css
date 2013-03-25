@@ -240,3 +240,30 @@ input.searchbox {
 .checkbox input {
 	margin-right: 5px;
 }
+
+.more-settings {
+	color: #252525;
+	font-size: 13px;	
+	margin-top: 10px !important;
+	margin-bottom: 10px !important;
+	background: #f8f8f8;
+	padding:  10px 0;
+}
+
+.more-settings .clarification {
+	color: #777;
+}
+
+.more-settings .login-clarification {
+	color: #555;
+}
+.more-settings-login, a {
+	color: #0645AD;
+	list-style-type: none;
+	cursor: pointer;
+
+}
+
+.more-settings-login:hover, a:hover {
+	text-decoration: underline;
+}

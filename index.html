@@ -161,7 +161,7 @@
 			var contentLang = null;
 			var uiLang = null;
 			var previousUILang=null;
-			
+			var logged= false;
 			function loadArticleInfo(article) {
 				$.getJSON('lang/article/' + article + '.json', function(data) {
 					langs = data.langs;
@@ -170,7 +170,18 @@
 				});
 
 			}
-
+			
+			function getNameForLang(lang){
+				var result = null;
+				langs.forEach(function(e) {
+					if(e.code == lang){
+						result = e.name;						
+					}
+					
+				});
+				return result;
+			}
+			
 			function createArticleLinks() {
 				var list = $(".language-list");
 				list.empty();
@@ -195,11 +206,12 @@
 				$("body").hide();
 				var elt = $(this);
 				contentLang = elt.attr('lang');
+				uiLang = elt.attr('lang');
 
 				$('.language').show();
 				setArticleLang(contentLang);
 				createArticleLinks();
-				changeUILanguage(contentLang);
+				changeUILanguage(uiLang);
 				$("body").fadeIn();
 
 			}
@@ -241,6 +253,10 @@
 					var value = $.i18n(key);
 				 	$(elt).text(value);
 				 });
+				 
+				 previousUiLang = uiLang;
+				 uiLang = lang;
+				$(".display-language-label").text(getNameForLang(uiLang));
 			}
 			
 			function changeUiLangAction(){
@@ -249,8 +265,6 @@
 				$(this).addClass("down");
 				changeUILanguage(lang);
 				$("#uls-displaysettings-apply").removeAttr("disabled");
-				 previousUiLang = uiLang;
-				 uiLang = lang;
 			}
 			
 			function cancelUiLangAction(){
@@ -263,6 +277,17 @@
 				}
 			}
 			
+			function becomeAnonymous(){
+				$(".ui-language-settings, .ext-uls-display-settings-font-settings").addClass("hidden");
+				$(".more-settings").removeClass("hidden");
+				logged=false;
+			}
+			
+			function becomeLoggedIn(){
+				$(".ui-language-settings, .ext-uls-display-settings-font-settings").removeClass("hidden");
+				$(".more-settings").addClass("hidden");
+				logged = true;
+			}
 
 			$(document).ready(function() {
 
@@ -283,15 +308,27 @@
 					if($.inArray(e, articles)>0){
 						article = e;
 					}
+					//Logged:
+					if(e == "logged"){
+						logged = true;
+					}
 				
 				});
 				
 				//Set defaults
 				if(contentLang == null)	{ contentLang = defaultLang; }
 				if(uiLang == null)	{ uiLang = contentLang; }
+				
 				//Create elements:
 				loadArticleInfo(article);
-
+				
+				//Set-up actions:
+				
+				if(logged){
+					becomeLoggedIn();					
+				}else{
+					becomeAnonymous();
+				}
 				//Callbacks:
 				$('.menu-group').click(function() {
 					$(this).toggleClass('closed');
@@ -476,11 +513,15 @@
 														</div>
 													</div>
 												</div>
-													
+													<div class="row more-settings">
+														<div class="twelve columns" >
+															<b>Display language.</b> <span class="display-language-label">English</span> <span class="clarification">(same as content)</span><br/><span class="more-settings-login">Log-in</span> <span class="login-clarification">to select a different language for menus.</span>
+														</div>
+													</div>
 												<div class="font-settings-block">
 													<div class="row">
 														<div class="twelve columns">
-															<h4 data-i18n="ext-uls-display-settings-font-settings">Font settings</h4>
+															<h4 data-i18n="ext-uls-display-settings-font-settings" class="ext-uls-display-settings-font-settings">Font settings</h4>
 														</div>
 													</div>
 													<div class="row">
@@ -492,7 +533,7 @@
 													</div>
 													<div class="row uls-content-fonts" style="">
 														<div class="six columns">
-															<label class="uls-font-label" id="content-font-selector-label"><strong>Select font for English</strong>
+															<label class="uls-font-label" id="content-font-selector-label"><strong>Select font for <span class="display-language-label">English</span></strong>
 																<div data-i18n="ext-uls-webfonts-select-for-content-info">
 																	Font used for content
 																</div></label>
@@ -506,7 +547,14 @@
 															<label class="uls-font-label" id="ui-font-selector-label"></label>
 														</div><select id="ui-font-selector" class="four columns end uls-font-select"></select>
 													</div>
-													</div><div class="row"></div>
+													</div>
+													
+													<!--<div class="row more-settings">
+														<div class="twelve columns" >
+															<span class="more-settings-login">Log-in</span> to select a different language for menus.
+														</div>
+													</div>-->
+													
 													<div class="row language-settings-buttons">
 														<div class="eleven columns">
 															<button class="button uls-display-settings-cancel" data-i18n="ext-uls-language-settings-cancel">
@@ -537,10 +585,10 @@
 					<!-- Headers -->
 					<div class="row">
 						<div class="personal">
-							<div class="span2" data-i18n="pt-createaccount">
+							<div class="span2 create-account" data-i18n="pt-createaccount">
 								Create account
 							</div>
-							<div class="span1" data-i18n="pt-login">
+							<div class="span1 login" data-i18n="pt-login">
 								Login
 							</div>
 						</div>
