@@ -280,12 +280,17 @@
 			function becomeAnonymous(){
 				$(".ui-language-settings, .ext-uls-display-settings-font-settings").addClass("hidden");
 				$(".more-settings").removeClass("hidden");
+				$(".annon-block").removeClass("hidden");
+				$(".logged-block").addClass("hidden");
 				logged=false;
 			}
 			
 			function becomeLoggedIn(){
 				$(".ui-language-settings, .ext-uls-display-settings-font-settings").removeClass("hidden");
 				$(".more-settings").addClass("hidden");
+				$(".annon-block").addClass("hidden");
+				$(".logged-block").removeClass("hidden");
+				
 				logged = true;
 			}
 
@@ -585,11 +590,25 @@
 					<!-- Headers -->
 					<div class="row">
 						<div class="personal">
-							<div class="span2 create-account" data-i18n="pt-createaccount">
-								Create account
+							<div class="annon-block">
+								<div class="span2 create-account" data-i18n="pt-createaccount">
+									Create account
+								</div>
+								<div class="span1 login" data-i18n="pt-login">
+									Login
+								</div>
 							</div>
-							<div class="span1 login" data-i18n="pt-login">
-								Login
+							<div class="logged-block hidden">
+								<div class="span2 username" >
+									tester12
+								</div>
+								<div class="span1 settings" >
+									Preferences
+								</div>
+								<div class="span1 logout" >
+									Logout
+								</div>
+								
 							</div>
 						</div>
 						<div class="tabs">

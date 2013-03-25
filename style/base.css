@@ -267,3 +267,13 @@ input.searchbox {
 .more-settings-login:hover, a:hover {
 	text-decoration: underline;
 }
+
+.username:before,
+.login:before {
+	height: 18px;
+	width: 18px;
+	display: inline-block;
+	content:"";
+	background: transparent url(../images/user-icon.png) center center no-repeat;
+	vertical-align: top;
+}
