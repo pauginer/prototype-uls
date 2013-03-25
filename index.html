@@ -154,7 +154,7 @@
 		<script src="libs/jquery.i18n.js"></script>
 		<script src="libs/bootstrap/js/bootstrap.min.js"></script>
 		<script>
-			var articles = ["lisa", "memory"];
+			var articles = ["lisa", "memory", "pinata"];
 			var article = articles[0];
 			var langs = null;
 			var defaultLang = "en";
@@ -175,7 +175,7 @@
 				var result = null;
 				langs.forEach(function(e) {
 					if(e.code == lang){
-						result = e.name;						
+						result = e.name;
 					}
 					
 				});
@@ -290,10 +290,22 @@
 				$(".more-settings").addClass("hidden");
 				$(".annon-block").addClass("hidden");
 				$(".logged-block").removeClass("hidden");
+				hideInlineLoginForm();
 				
 				logged = true;
 			}
-
+			
+			function showInlineLoginForm(){
+				$('.inline-login-form').removeClass("hidden");
+				$('.more-settings-block').addClass("hidden");
+			}
+			
+			function hideInlineLoginForm(){
+				$('.more-settings-block').removeClass("hidden");
+				$('.inline-login-form').addClass("hidden");
+			}
+			
+			
 			$(document).ready(function() {
 
 				//Process parameters:
@@ -351,6 +363,10 @@
 				$(".display-settings-block").click(showDisplaySettings);
 				$(".ui-language-settings .uls-language-button").click(changeUiLangAction);
 				$(".uls-display-settings-cancel").click(cancelUiLangAction);
+				$(".inline-login-form .login.button").click(becomeLoggedIn);
+				$(".inline-login-form .cancel.button").click(hideInlineLoginForm);
+				$(".more-settings-login").click(showInlineLoginForm);
+				
 				
 				$( 'html' ).click( function () {
 					closeLanguageSettingsDialog();
@@ -520,9 +536,18 @@
 												</div>
 													<div class="row more-settings">
 														<div class="twelve columns" >
-															<b>Display language.</b> <span class="display-language-label">English</span> <span class="clarification">(same as content)</span><br/><span class="more-settings-login">Log-in</span> <span class="login-clarification">to select a different language for menus.</span>
+															<b>Display language.</b> <span class="display-language-label">English</span> <span class="clarification">(same as content)</span><br/>
+															<span class="more-settings-block"><span class="more-settings-login">Log in</span> <span class="login-clarification">to select a different language for menus.</span></span>
 														</div>
+														<div class="twelve columns inline-login-form hidden">
+															<input type="text" placeholder="Username"/> <br/>
+															<input type="password" placeholder="Password"/> <br/>
+															<button class="blue button login">Login</button> <button class="button cancel">Cancel</button> <br/>
+															<a class="new-account-link">Create new account</a>
+														</div>
+													
 													</div>
+													
 												<div class="font-settings-block">
 													<div class="row">
 														<div class="twelve columns">
@@ -594,7 +619,7 @@
 								<div class="span2 create-account" data-i18n="pt-createaccount">
 									Create account
 								</div>
-								<div class="span1 login" data-i18n="pt-login">
+								<div class="span1 login-link" data-i18n="pt-login">
 									Login
 								</div>
 							</div>

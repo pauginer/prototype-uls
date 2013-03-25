@@ -269,11 +269,20 @@ input.searchbox {
 }
 
 .username:before,
-.login:before {
+.login-link:before {
 	height: 18px;
 	width: 18px;
 	display: inline-block;
 	content:"";
 	background: transparent url(../images/user-icon.png) center center no-repeat;
 	vertical-align: top;
+}
+
+.inline-login-form{
+	margin: 15px 0 !important;
+}
+
+.new-account-link {
+	display: inline-block;
+	margin-top: 10px;
 }
