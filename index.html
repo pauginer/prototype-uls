@@ -239,6 +239,7 @@
 			function openLanguageSettingsDialog() {
 				$('.language-settings-dialog').removeClass('hidden');
 				$('.language-settings').addClass('active');
+				
 			}
 
 			function showInputSettings() {
@@ -268,6 +269,8 @@
 				 previousUiLang = uiLang;
 				 uiLang = lang;
 				$(".display-language-label").text(getNameForLang(uiLang));
+				updateUiLangButtons();
+				
 			}
 			
 			function changeUiLangAction(){
@@ -384,6 +387,29 @@
 				dyslexic = (value == "OpenDyslexic");
 				$("#uls-displaysettings-apply").removeAttr("disabled");
 			}
+			
+			function updateUiLangButtons(){
+				var buttons = $(".ui-language-settings .uls-language-button");
+				buttons.removeClass("down");
+				$(buttons[0]).attr("lang",uiLang);
+				$(buttons[0]).text(getNameForLang(uiLang));
+				$(buttons[0]).addClass("down");
+				
+				var secondLang = contentLang;
+				if(secondLang == uiLang){
+					secondLang = (uiLang=="en")?"es":"en";
+				}
+				
+				var thirdLang = (secondLang == "es" || uiLang == "es")? "ru":"es";
+				$(buttons[1]).attr("lang",secondLang);
+				$(buttons[1]).text(getNameForLang(secondLang));
+				
+				$(buttons[2]).attr("lang",thirdLang);
+				$(buttons[2]).text(getNameForLang(thirdLang));
+				
+				
+			}
+			
 			
 			$(document).ready(function() {
 
