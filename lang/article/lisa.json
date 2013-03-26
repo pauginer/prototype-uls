@@ -1,6 +1,5 @@
 {"langs": 
-	[	{"code":"en","name":"English"},
-		{"code":"af", "name":"Afrikaans"},
+	[	{"code":"af", "name":"Afrikaans"},
 		{"code":"am", "name":"አማርኛ"},
 		{"code":"ar", "name":"العربية"},
 		{"code":"az", "name":"Azərbaycanca"},
@@ -19,6 +18,7 @@
 		{"code":"de", "name":"Deutsch"},
 		{"code":"et", "name":"Eesti"},
 		{"code":"el", "name":"Ελληνικά"},
+		{"code":"en","name":"English"},
 		{"code":"es", "name":"Español"},
 		{"code":"eo", "name":"Esperanto"},
 		{"code":"eu", "name":"Euskara"},

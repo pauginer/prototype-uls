@@ -162,8 +162,12 @@
 			var defaultLang = "en";
 			var contentLang = null;
 			var uiLang = null;
+			var inputLang= null;
 			var previousUILang=null;
 			var logged= false;
+			var dyslexic = false;
+			var dyslexicLangs=['en','es','it'];
+			
 			function loadArticleInfo(article) {
 				$.getJSON('lang/article/' + article + '.json', function(data) {
 					langs = data.langs;
@@ -200,6 +204,9 @@
 
 			function setArticleLang(lang) {
 				var langcode = lang;
+				if(dyslexic && $.inArray(lang,dyslexicLangs)>=0){
+					langcode= "dyslexic-"+langcode;
+				}
 				var filename = "images/article-" + article + "-" + langcode + ".png";
 				$('.article-bg').attr('src', filename);
 			}
@@ -226,6 +233,8 @@
 			function closeLanguageSettingsDialog() {
 				$('.language-settings-dialog').addClass('hidden');
 				$('.language-settings').removeClass('active');
+				setArticleLang(contentLang);
+				
 			}
 			function openLanguageSettingsDialog() {
 				$('.language-settings-dialog').removeClass('hidden');
@@ -267,6 +276,16 @@
 				$(this).addClass("down");
 				changeUILanguage(lang);
 				$("#uls-displaysettings-apply").removeAttr("disabled");
+			}
+			
+			function changeInputLangButtonAction(e){
+				var lang = $(this).attr("lang");
+				$( ".uls-language-button.down",$(this).parent()).removeClass("down");
+				$(this).addClass("down");
+				//changeUILanguage(lang);
+				inputLang=lang;
+				$("#uls-input-settings-apply").removeAttr("disabled");
+				$(".input-lang-label").text(getNameForLang(lang));
 			}
 			
 			function cancelUiLangAction(){
@@ -311,6 +330,7 @@
 			function closeKeyboard(){
 				$('.keyboard-container').addClass('hidden');
 				$("#virtual-keyboard-select").attr('checked', false);
+				$("#system").attr('checked', true);
 			}
 			
 			function openKeyboard(){
@@ -359,6 +379,12 @@
 				return '<form class="form"> <input type="text" class="popoverUsername" placeholder="Username"> <input type="password" class="popoverPassword" placeholder="Password"> <div class="controls">  <button type="button" class="popover-login button blue big" onclick="becomeLoggedIn()">Log in</button> </div> </form>';
 			}
 			
+			function fontSelectionAction(){
+				var value=$(this).val();
+				dyslexic = (value == "OpenDyslexic");
+				$("#uls-displaysettings-apply").removeAttr("disabled");
+			}
+			
 			$(document).ready(function() {
 
 				//Process parameters:
@@ -375,7 +401,7 @@
 						}
 					}
 					//Article:
-					if($.inArray(e, articles)>0){
+					if($.inArray(e, articles)>=0){
 						article = e;
 					}
 					//Logged:
@@ -420,6 +446,7 @@
 				$(".input-settings-block").click(showInputSettings);
 				$(".display-settings-block").click(showDisplaySettings);
 				$(".ui-language-settings .uls-language-button").click(changeUiLangAction);
+				$(".input-methods-block .uls-language-button").click(changeInputLangButtonAction);
 				$(".uls-display-settings-cancel").click(cancelUiLangAction);
 				$(".inline-login-form .login.button").click(becomeLoggedIn);
 				$(".inline-login-form .cancel.button").click(hideInlineLoginForm);
@@ -432,6 +459,7 @@
 				$(".search-button").click(searchArticle);
 				$(".searchbox").keypress(function(e){if (e.which == 13){ searchArticle(); } });
 				$(".logout").click(becomeAnonymous);
+				$(".uls-font-select").change(fontSelectionAction);
 				$( 'html' ).click( function () {
 					closeLanguageSettingsDialog();
 				} );
@@ -691,7 +719,7 @@
 													</div>
 													<div class="row">
 														<div class="eleven columns uls-input-settings-inputmethods-list" style="">
-															<h4 class="ext-uls-input-settings-imes-title">Input methods for English</h4><label for="virtual-keyboard-select" class="imelabel">
+															<h4 class="ext-uls-input-settings-imes-title">Input methods for <span class="input-lang-label">English</span></h4><label for="virtual-keyboard-select" class="imelabel">
 																<input type="radio" name="ime" id="virtual-keyboard-select" value="virtual-keyboard-select">
 																<strong>Virtual keyboard</strong><span>Graphic keyboard</span></label><label for="system" class="imelabel">
 																<input type="radio" name="ime" id="system" value="system" checked="checked">

@@ -1,11 +1,11 @@
 {"langs": 
-	[	{"code":"en","name":"English"},
-		{"code":"af", "name":"Afrikaans"},
+	[	{"code":"af", "name":"Afrikaans"},
 		{"code":"ar", "name":"العربية"},
 		{"code":"ca", "name":"Català"},
 		{"code":"da", "name":"Dansk"},
 		{"code":"de", "name":"Deutsch"},
 		{"code":"el", "name":"Ελληνικά"},
+		{"code":"en","name":"English"},
 		{"code":"es", "name":"Español"},
 		{"code":"fa", "name":"فارسی"},
 		{"code":"fr", "name":"Français"},
