@@ -531,7 +531,7 @@
 								<li data-i18n="coll-create_a_book">
 									Create a book
 								</li>
-								<li data-i18n="coll-download-as-rl">
+								<li data-i18n="coll-download-as-rl" data-toggle="modal" data-target="#myModal" data-role="button">
 									Download as PDF
 								</li>
 								<li data-i18n="t-print">
@@ -848,6 +848,19 @@
 	</ul>
 </div>
 
+<!-- Modal -->
+<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3 id="myModalLabel">Article exported</h3>
+  </div>
+  <div class="modal-body">
+    <p>The article has been exported to your disk. You can continue with the test.</p>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-primary" data-dismiss="modal" aria-hidden="true">Close</button>
+  </div>
+</div>
 		
 	</body>
 </html>
