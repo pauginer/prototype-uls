@@ -153,6 +153,7 @@
 		<link rel="stylesheet" href="style/base.css">
 		<script src="libs/jquery.js"></script>
 		<script src="libs/jquery.i18n.js"></script>
+		<script src="libs/jquery.uls/jquery.uls.js"></script>
 		<script src="libs/bootstrap/js/bootstrap.min.js"></script>
 		<script src="libs/keyboard/js/keyboard.js"></script>
 		<script>
@@ -173,6 +174,7 @@
 					langs = data.langs;
 					setArticleLang(contentLang);
 					createArticleLinks();
+					prepareULS();
 				});
 
 			}
@@ -191,7 +193,14 @@
 			function createArticleLinks() {
 				var list = $(".language-list");
 				list.empty();
-				langs.forEach(function(lang) {
+				var languages = langs;
+				if(langs.length >30){
+					languages = langs.slice(0,10);
+					$('.uls-trigger-block').removeClass('hidden');
+				}else{
+					$('.uls-trigger-block').addClass('hidden');
+				}
+				languages.forEach(function(lang) {
 					var item = $('<li>');
 					item.text(lang.name);
 					item.attr('lang', lang.code);
@@ -409,7 +418,41 @@
 				
 				
 			}
+			function langDict(){
+			  var rv = {};
+			  for (var i = 0; i < langs.length; ++i)
+			    rv[langs[i].code] = langs[i].name;
+			   
+			  console.debug(rv);
+			  return rv;
+
+			}
 			
+			function prepareULS(){
+				$( '.uls-trigger' ).uls( {
+				onSelect: function ( language ) {
+					var languageName = $.uls.data.getAutonym( language );
+					setArticleLang(language);
+					createArticleLinks();
+					changeUILanguage(language);
+					$("body").fadeIn();
+				},
+				lazyload: false,
+				languages: langDict()
+			} );
+			
+			$( '.uls-trigger' ).click( function () {
+				//Hacks to include optional classes and make the dialog close when clicking outside:
+				$( '.uls-menu' ).addClass( 'uls-compact' );
+				$( 'html' ).click( function () {
+					$( '.uls-menu' ).hide();
+				} );
+
+				$( '.uls-menu' ).click( function ( event ) {
+					event.stopPropagation();
+				} );
+				} );
+			}
 			
 			$(document).ready(function() {
 
@@ -784,6 +827,10 @@
 								Languages
 							</div>
 							<ul class="language-list"></ul>
+							<div class="uls-trigger-block">
+								<span class="uls-trigger">...</span>
+								<div class="uls-more-langs-label">60 more languages</div>
+							</div>
 						</div>
 
 					</div>

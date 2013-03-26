@@ -308,3 +308,26 @@ input.searchbox {
 	cursor: pointer;
 	z-index:100;
 }
+
+
+.uls-trigger {
+	cursor: pointer;
+	color: #252525;
+	background: #f0f0f0;
+	border: 1px solid #ddd;
+	padding: 0 8px;
+	border-radius: 3px;
+	margin-left: 18px;
+	
+}
+
+.uls-more-langs-label {
+	margin-left: 18px;
+	font-size: 12px;
+	color: #777;
+}
+.uls-menu {
+	margin-top: -100px;
+	left: 175px!important;
+	
+}
