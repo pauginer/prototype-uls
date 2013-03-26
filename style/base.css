@@ -327,7 +327,34 @@ input.searchbox {
 	color: #777;
 }
 .uls-menu {
-	margin-top: -100px;
+	margin-top: -160px;
 	left: 175px!important;
-	
+}
+
+/*
+.uls-menu:before {
+	display: inline-block;
+	content: "";
+	border-right: 20px solid #AAA;
+	border-top: 20px solid transparent;
+	border-bottom: 20px solid transparent;
+	left: -20px;
+	top: 6px;
+	position: absolute;
+}
+
+.uls-menu:after {
+	display: inline-block;
+	content: "";
+	border-right: 20px solid white;
+	border-top: 20px solid transparent;
+	border-bottom: 20px solid transparent;
+	left: -19px;
+	top: 6px;
+	position: absolute;
+}
+*/
+
+.uls-compact .languagefilter-clear {
+margin-left: -32px;
 }
