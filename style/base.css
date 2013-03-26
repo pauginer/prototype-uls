@@ -286,3 +286,21 @@ input.searchbox {
 	display: inline-block;
 	margin-top: 10px;
 }
+
+.uls-input-settings-disable-info{
+	padding: 10px 0 !important;
+}
+.search-button {
+	content:"";
+	display: inline-block;
+	width: 15px;
+	height: 15px;
+	background: transparent url("../images/search.png") center center no-repeat;
+	background-size: 100%;
+	vertical-align: middle;
+	position: relative;
+	left: -25px;
+	top: 2px;
+	cursor: pointer;
+	z-index:100;
+}

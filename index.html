@@ -143,6 +143,7 @@
 		<link rel="localization" hreflang="zh-hans" href="lang/uls/zh-hans.json" type="application/l10n+json"/>
 		
 		
+		<link rel="stylesheet" href="libs/keyboard/css/style.css">
 		<link href="libs/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
 		<link rel="stylesheet" href="style/jquery.uls.css">
 		<link rel="stylesheet" href="style/ext.uls.css">
@@ -153,8 +154,9 @@
 		<script src="libs/jquery.js"></script>
 		<script src="libs/jquery.i18n.js"></script>
 		<script src="libs/bootstrap/js/bootstrap.min.js"></script>
+		<script src="libs/keyboard/js/keyboard.js"></script>
 		<script>
-			var articles = ["lisa", "memory", "pinata"];
+			var articles = ["memory", "lisa", "pinata"];
 			var article = articles[0];
 			var langs = null;
 			var defaultLang = "en";
@@ -305,6 +307,52 @@
 				$('.inline-login-form').addClass("hidden");
 			}
 			
+			function closeKeyboard(){
+				$('.keyboard-container').addClass('hidden');
+				$("#virtual-keyboard-select").attr('checked', false);
+			}
+			
+			function openKeyboard(){
+				$('.keyboard-container').removeClass('hidden');
+				$("#virtual-keyboard-select").attr('checked', true);
+			}
+			
+			function enableInputMethodTools(){
+				$('.input-methods-block, .input-methods-disable-block').removeClass('hidden');
+				$('.input-methods-enable-block').addClass('hidden');
+			}
+			
+			function disableInputMethodTools(){
+				$('.input-methods-block, .input-methods-disable-block').addClass('hidden');
+				$('.input-methods-enable-block').removeClass('hidden');
+			}
+			
+			function changeInputLangAction() {
+				var checked = $('#virtual-keyboard-select').is(':checked');
+				if (checked) {
+					openKeyboard();
+				} else {
+					closeKeyboard();
+				}
+				closeLanguageSettingsDialog();
+			}
+			
+			function searchArticle(){
+				var query = $(".searchbox").val();
+				if(query){
+					query = query.toLowerCase().trim();
+					if (query.match("^pi")!=null){
+						article="pinata";
+						loadArticleInfo(article);
+						$(".searchbox").val("");
+					}else if(query.match("^mona")!=null || query.match("^gio")!=null) {
+						article = "lisa";
+						loadArticleInfo(article);
+						$(".searchbox").val("");
+					}
+					
+				}
+			}
 			
 			$(document).ready(function() {
 
@@ -366,8 +414,13 @@
 				$(".inline-login-form .login.button").click(becomeLoggedIn);
 				$(".inline-login-form .cancel.button").click(hideInlineLoginForm);
 				$(".more-settings-login").click(showInlineLoginForm);
-				
-				
+				$(".keyboard-close").click(closeKeyboard);
+				$(".input-methods-disable-block .uls-input-toggle-button").click(disableInputMethodTools);
+				$(".input-methods-enable-block .uls-input-toggle-button").click(enableInputMethodTools);
+				$(".uls-input-settings-apply").click(changeInputLangAction);
+				$(".uls-input-settings-cancel").click(closeLanguageSettingsDialog);
+				$(".search-button").click(searchArticle);
+				$(".searchbox").keypress(function(e){if (e.which == 13){ searchArticle(); } });
 				$( 'html' ).click( function () {
 					closeLanguageSettingsDialog();
 				} );
@@ -596,8 +649,68 @@
 														</div>
 													</div>
 											</div>
-											<div class="uls-input-settings hidden"><div class="row"><div class="twelve columns"><h3 data-i18n="ext-uls-input-settings-title">Input settings</h3></div></div><div class="row uls-input-settings-languages-title" style=""><div class="eleven columns"><h4 data-i18n="ext-uls-input-settings-ui-language">Language used for writing</h4></div></div><div class="row"><div class="uls-ui-languages eleven columns" style=""><button class="button uls-language-button down" lang="en" dir="ltr">English</button><span class="uls-input-settings-caret"></span><button class="button uls-language-button" lang="ca" dir="ltr">català</button><span class="uls-input-settings-caret"></span><button class="button uls-language-button" lang="es" dir="ltr">español</button><span class="uls-input-settings-caret"></span><button id="uls-more-languages" class="button">...</button></div></div><div class="row"><div class="eleven columns uls-input-settings-inputmethods-list" style=""><h4 class="ext-uls-input-settings-imes-title">Input methods for English</h4><label for="ipa-sil" class="imelabel"><input type="radio" name="ime" id="ipa-sil" value="ipa-sil"><strong>International Phonetic Alphabet - SIL</strong><span></span></label><label for="system" class="imelabel"><input type="radio" name="ime" id="system" value="system" checked="checked"><strong>Disable input method</strong><span>Use a regular keyboard</span></label></div></div><div class="row"><div class="eleven columns button uls-input-settings-disable-info" style="display: none;"></div><div class="six columns button uls-input-settings-toggle"><button class="active green button uls-input-toggle-button">Disable input method tools</button></div></div><div class="row"></div><div class="row language-settings-buttons"><div class="eleven columns"><button class="button uls-input-settings-cancel" data-i18n="ext-uls-language-settings-cancel">Cancel</button><button class="active blue button uls-input-settings-apply" data-i18n="ext-uls-language-settings-apply">Apply settings</button></div></div></div>
-										</div>
+											<div class="uls-input-settings hidden">
+												<div class="row">
+													<div class="twelve columns">
+														<h3 data-i18n="ext-uls-input-settings-title">Input settings</h3>
+													</div>
+												</div>
+												
+												<div class="input-methods-block">
+													<div class="row uls-input-settings-languages-title" style="">
+														<div class="eleven columns">
+															<h4 data-i18n="ext-uls-input-settings-ui-language">Language used for writing</h4>
+														</div>
+													</div>
+													<div class="row">
+														<div class="uls-ui-languages eleven columns" style="">
+															<button class="button uls-language-button down" lang="en" dir="ltr">
+																English
+															</button><span class="uls-input-settings-caret"></span>
+															<button class="button uls-language-button" lang="ca" dir="ltr">
+																català
+															</button><span class="uls-input-settings-caret"></span>
+															<button class="button uls-language-button" lang="es" dir="ltr">
+																español
+															</button><span class="uls-input-settings-caret"></span>
+															<button id="uls-more-languages" class="button">
+																...
+															</button>
+														</div>
+													</div>
+													<div class="row">
+														<div class="eleven columns uls-input-settings-inputmethods-list" style="">
+															<h4 class="ext-uls-input-settings-imes-title">Input methods for English</h4><label for="virtual-keyboard-select" class="imelabel">
+																<input type="radio" name="ime" id="virtual-keyboard-select" value="virtual-keyboard-select">
+																<strong>Virtual keyboard</strong><span>Graphic keyboard</span></label><label for="system" class="imelabel">
+																<input type="radio" name="ime" id="system" value="system" checked="checked">
+																<strong>Disable input method</strong><span>Use a regular keyboard</span></label>
+														</div>
+													</div>
+												</div>
+												
+												<div class="row input-methods-disable-block">
+													<div class="eleven columns button uls-input-settings-disable-info" style="display: none;"></div>
+													<div class="six columns button uls-input-settings-toggle">
+														<button class="active green button uls-input-toggle-button">
+															Disable input method tools
+														</button>
+													</div>
+												</div>
+												<div class="row input-methods-enable-block hidden"><div class="eleven columns button uls-input-settings-disable-info" style="">Input method tools are disabled.</div><div class="six columns button uls-input-settings-toggle"><button class="active green button uls-input-toggle-button">Enable input method tools</button></div></div>
+												<div class="row"></div>
+												<div class="row language-settings-buttons">
+													<div class="eleven columns">
+														<button class="button uls-input-settings-cancel" data-i18n="ext-uls-language-settings-cancel">
+															Cancel
+														</button>
+														<button class="active blue button uls-input-settings-apply" data-i18n="ext-uls-language-settings-apply">
+															Apply settings
+														</button>
+													</div>
+												</div>
+											</div>
+	</div>
 									</div>
 								</div>
 
@@ -656,7 +769,7 @@
 									View history
 								</div>
 								<div class=" search">
-									<input class="searchbox" type="text" placeholder="Search" />
+									<input id="searchbox" class="searchbox" type="text" placeholder="Search" /> <span class="search-button"></span>
 								</div>
 							</div>
 						</div>
@@ -664,6 +777,66 @@
 				</div>
 			</div>
 		</div>
-		<img class="article-bg" src="images/article-lisa-en.png" width="958" height="7000"></img>
+		<img class="article-bg" src="" width="958" height="7000"></img>
+		<div id="keyboard-container" class="keyboard-container hidden"> <div class="row"><span class="keyboard-close"></span></div>
+	<ul id="keyboard">
+		<li class="symbol"><span class="off">`</span><span class="on">~</span></li>
+		<li class="symbol"><span class="off">1</span><span class="on">!</span></li>
+		<li class="symbol"><span class="off">2</span><span class="on">@</span></li>
+		<li class="symbol"><span class="off">3</span><span class="on">#</span></li>
+		<li class="symbol"><span class="off">4</span><span class="on">$</span></li>
+		<li class="symbol"><span class="off">5</span><span class="on">%</span></li>
+		<li class="symbol"><span class="off">6</span><span class="on">^</span></li>
+		<li class="symbol"><span class="off">7</span><span class="on">&amp;</span></li>
+		<li class="symbol"><span class="off">8</span><span class="on">*</span></li>
+		<li class="symbol"><span class="off">9</span><span class="on">(</span></li>
+		<li class="symbol"><span class="off">0</span><span class="on">)</span></li>
+		<li class="symbol"><span class="off">-</span><span class="on">_</span></li>
+		<li class="symbol"><span class="off">=</span><span class="on">+</span></li>
+		<li class="delete lastitem">delete</li>
+		<li class="tab">tab</li>
+		<li class="letter">q</li>
+		<li class="letter">w</li>
+		<li class="letter">e</li>
+		<li class="letter">r</li>
+		<li class="letter">t</li>
+		<li class="letter">y</li>
+		<li class="letter">u</li>
+		<li class="letter">i</li>
+		<li class="letter">o</li>
+		<li class="letter">p</li>
+		<li class="symbol"><span class="off">[</span><span class="on">{</span></li>
+		<li class="symbol"><span class="off">]</span><span class="on">}</span></li>
+		<li class="symbol lastitem"><span class="off">\</span><span class="on">|</span></li>
+		<li class="capslock">caps lock</li>
+		<li class="letter">a</li>
+		<li class="letter">s</li>
+		<li class="letter">d</li>
+		<li class="letter">f</li>
+		<li class="letter">g</li>
+		<li class="letter">h</li>
+		<li class="letter">j</li>
+		<li class="letter">k</li>
+		<li class="letter">l</li>
+		<li class="symbol"><span class="off">;</span><span class="on">:</span></li>
+		<li class="symbol"><span class="off">'</span><span class="on">&quot;</span></li>
+		<li class="return lastitem">return</li>
+		<li class="left-shift">shift</li>
+		<li class="letter">z</li>
+		<li class="letter">x</li>
+		<li class="letter">c</li>
+		<li class="letter">v</li>
+		<li class="letter">b</li>
+		<li class="letter">n</li>
+		<li class="letter">ñ</li>
+		<li class="letter">m</li>
+		<li class="symbol"><span class="off">,</span><span class="on">&lt;</span></li>
+		<li class="symbol"><span class="off">.</span><span class="on">&gt;</span></li>
+		<li class="right-shift lastitem">shift</li>
+		<li class="space lastitem">&nbsp;</li>
+	</ul>
+</div>
+
+		
 	</body>
 </html>
