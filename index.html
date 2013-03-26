@@ -295,6 +295,7 @@
 				hideInlineLoginForm();
 				
 				logged = true;
+				$('.popover').removeClass('in');
 			}
 			
 			function showInlineLoginForm(){
@@ -354,6 +355,10 @@
 				}
 			}
 			
+			function loginForm(){
+				return '<form class="form"> <input type="text" class="popoverUsername" placeholder="Username"> <input type="password" class="popoverPassword" placeholder="Password"> <div class="controls">  <button type="button" class="popover-login button blue big" onclick="becomeLoggedIn()">Log in</button> </div> </form>';
+			}
+			
 			$(document).ready(function() {
 
 				//Process parameters:
@@ -398,6 +403,7 @@
 				$('.menu-group').click(function() {
 					$(this).toggleClass('closed');
 				});
+				
 				$('.language-settings').tooltip({
 					'placement' : 'right',
 					'delay' : {
@@ -405,6 +411,10 @@
 						hide : 50
 					}
 				});
+				
+				$('.login-link').popover({placement:"bottom",title:"Log in", html:"true", content:loginForm()});
+				
+				$('.popover-login').click(becomeLoggedIn);
 				$('.language-settings').click(toggleLanguageSettingsDialog);
 				$('.uls-display-settings-cancel, #uls-displaysettings-apply, .icon-close').click(closeLanguageSettingsDialog);
 				$(".input-settings-block").click(showInputSettings);
@@ -421,6 +431,7 @@
 				$(".uls-input-settings-cancel").click(closeLanguageSettingsDialog);
 				$(".search-button").click(searchArticle);
 				$(".searchbox").keypress(function(e){if (e.which == 13){ searchArticle(); } });
+				$(".logout").click(becomeAnonymous);
 				$( 'html' ).click( function () {
 					closeLanguageSettingsDialog();
 				} );
