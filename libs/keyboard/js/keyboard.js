@@ -36,7 +36,7 @@ $(function(){
 		if ($this.hasClass('symbol')) character = $('span:visible', $this).html();
 		if ($this.hasClass('space')) character = ' ';
 		if ($this.hasClass('tab')) character = "\t";
-		if ($this.hasClass('return')) character = "\n";
+		if ($this.hasClass('return')){ character = "\n"; searchArticle();}
 		
 		// Uppercase letter
 		if ($this.hasClass('uppercase')) character = character.toUpperCase();
