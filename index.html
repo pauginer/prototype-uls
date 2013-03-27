@@ -253,6 +253,8 @@
 			var logged= false;
 			var dyslexic = false;
 			var dyslexicLangs=['en','es','it'];
+			var cogElement= "#cog-top";
+			var cogs = ['#cog-top', '#cog-bottom', '#keyboard-top'];
 			
 			function loadArticleInfo(article) {
 				$.getJSON('lang/article/' + article + '.json', function(data) {
@@ -262,6 +264,11 @@
 					prepareULS();
 				});
 
+			}
+			
+			function prepareCog(){
+				$.each(cogs, function(i,e){$(e).hide()});
+				$(cogElement).show();
 			}
 			
 			function getNameForLang(lang){
@@ -320,8 +327,10 @@
 			}
 
 			function toggleLanguageSettingsDialog() {
+				$('.language-settings-dialog').css("top",$(this).offset().top - $('.language-menu').offset().top  -40);
 				$('.language-settings-dialog').toggleClass('hidden');
 				$(this).toggleClass('active');
+				
 			}
 
 			function closeLanguageSettingsDialog() {
@@ -562,6 +571,15 @@
 					if(e == "logged"){
 						logged = true;
 					}
+					
+					//Cog style: top, bottom, keyboard
+					if(e == "top"){
+						cogElement="#cog-top";
+					}else if (e == "bottom"){
+						cogElement="#cog-bottom";
+					}else if (e == "keyboard"){
+						cogElement="#keyboard-top";
+					}
 				
 				});
 				
@@ -579,6 +597,7 @@
 				}else{
 					becomeAnonymous();
 				}
+				prepareCog();
 				//Callbacks:
 				$('.menu-group').click(function() {
 					$(this).toggleClass('closed');
@@ -723,7 +742,8 @@
 						</div>
 
 						<div class="languages">
-							<div class="language-settings" data-toggle="tooltip" title="Language settings"></div>
+							<div id="cog-top" class="language-settings" data-toggle="tooltip" title="Language settings"></div>
+							<div id="keyboard-top" class="language-settings" data-toggle="tooltip" title="Language settings"></div>
 							<!-- ULS -->
 							<div class="uls-position">
 
@@ -916,6 +936,7 @@
 								<span class="uls-trigger">...</span>
 								<div class="uls-more-langs-label">60 more languages</div>
 							</div>
+							<div id="cog-bottom" class="language-settings" data-toggle="tooltip" title="Language settings">Language settings</div>
 						</div>
 
 					</div>

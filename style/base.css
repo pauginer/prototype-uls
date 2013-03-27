@@ -358,3 +358,39 @@ input.searchbox {
 .uls-compact .languagefilter-clear {
 margin-left: -32px;
 }
+
+/* Position alternatives: */
+
+#keyboard-top {
+	background: transparent url(../images/keyboard.png) center right no-repeat;	
+} 
+
+#keyboard-top:hover {
+	background: transparent url(../images/keyboard-hi.png) center right no-repeat;
+	
+}
+
+#cog-bottom {
+	display: block;
+	position: static;
+	padding: 2px 0  4px 15px;
+	
+	margin-left: 5px;
+	margin-right:0;
+	background: transparent url(../images/cog.png) center left no-repeat;
+	cursor: pointer;
+	font-size: 12px;
+	color: #333;
+	width:auto;
+	background-size: 12px;
+	border-top: 1px solid #EEE;
+/*	color:#0645AD;*/
+	color: #777;
+}
+#cog-bottom:hover {
+	background: transparent url(../images/cog-hi.png) center left no-repeat;
+	background-size: 12px;
+	color: black;
+}
+
+
