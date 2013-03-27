@@ -575,7 +575,7 @@
 						dir: $.uls.data.getDir( langCode )
 					} )
 					.append(
-						$( '<a>' ).prop( 'title', language ).html( langName )
+						$( '<a>' ).prop( 'title', language )?$( '<a>' ).prop( 'title', language ).html( langName ):""
 					);
 
 				// Append the element to the column in the list
