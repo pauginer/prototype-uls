@@ -175,7 +175,7 @@ input.searchbox {
 	display: inline-block;
 	position:absolute;
 	top: 4px;
-	right:0px;
+	right: 2px;
 	height: 15px;
 	width: 30px;
 	background: transparent url(../images/cog.png) center right no-repeat;
