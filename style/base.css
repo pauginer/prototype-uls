@@ -167,6 +167,12 @@ input.searchbox {
 .menu-group.closed + ul {
 	display: none;
 }
+
+#languagesettings-settings-panel,
+.uls-language-settings-close-block {
+	background: white;
+}
+
 .languages {
 	position: relative;
 }
@@ -193,6 +199,7 @@ input.searchbox {
 	display: block; 
 	top: -40px;
 	left: 160px;
+	background: #fbfbfb;
 }
 
 .language-settings-dialog:before {
@@ -225,7 +232,7 @@ input.searchbox {
 .ui-language-settings {
 	padding-bottom: 25px;
 	margin-bottom: 2px;
-	border-bottom: 1px solid #F0F0F0;
+
 }
 
 .ui-change-clarification {
@@ -355,6 +362,11 @@ input.searchbox {
 }
 */
 
+.uls-display-settings-block,
+.ui-language-settings-block {
+	min-height: 200px;
+}
+
 .uls-compact .languagefilter-clear {
 margin-left: -32px;
 }
@@ -393,4 +405,55 @@ margin-left: -32px;
 	color: black;
 }
 
+.display-switch-block {
+	text-align: center;
+}
 
+.button-group {
+	display: inline-block;
+	position: relative;
+	padding: 5px 0 10px 0;
+	left: -25px;
+}
+
+.button-group > button.button {
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  -ms-border-radius: 0;
+  -o-border-radius: 0;
+  border-radius: 0;
+  float: left;
+  padding: 8px 10px;
+  min-width: 80px;
+}
+/* line 52, sourcefiles/scss/components/default/_buttons.scss */
+.button-group > button.button:first-child {
+  -moz-border-radius-topleft: 3px;
+  -webkit-border-top-left-radius: 3px;
+  border-top-left-radius: 3px;
+  -moz-border-radius-bottomleft: 3px;
+  -webkit-border-bottom-left-radius: 3px;
+  border-bottom-left-radius: 3px;
+}
+/* line 57, sourcefiles/scss/components/default/_buttons.scss */
+.button-group > button.button:last-child {
+  -moz-border-radius-topright: 3px;
+  -webkit-border-top-right-radius: 3px;
+  border-top-right-radius: 3px;
+  -moz-border-radius-bottomright: 3px;
+  -webkit-border-bottom-right-radius: 3px;
+  border-bottom-right-radius: 3px;
+}
+
+
+.languagesettings-menu h1 {
+	padding: 5px 0 15px 15px;
+}
+
+.uls-content-fonts {
+	padding: 8px 0;
+	margin: 15px 0 !important;
+	border-top: 1px solid #EEE;
+	border-bottom: 1px solid #EEE;
+	background: #fbfbfb;
+}

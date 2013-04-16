@@ -548,6 +548,20 @@
 				} );
 			}
 			
+			function actionSwitchLanguage () {
+				$(".button",$(this).parent()).removeClass("down");
+				$(this).addClass("down");
+				$(".ui-language-settings-block").removeClass("hidden");
+				$(".font-settings-block").addClass("hidden");	
+			}
+			
+			function actionSwitchFonts () {
+				$(".button",$(this).parent()).removeClass("down");
+				$(this).addClass("down");
+				$(".font-settings-block").removeClass("hidden");
+				$(".ui-language-settings-block").addClass("hidden");	
+			}
+			
 			$(document).ready(function() {
 
 				//Process parameters:
@@ -633,6 +647,8 @@
 				$(".searchbox").keypress(function(e){if (e.which == 13){ searchArticle(); } });
 				$(".logout").click(becomeAnonymous);
 				$(".uls-font-select").change(fontSelectionAction);
+				$(".switch-language").click(actionSwitchLanguage);
+				$(".switch-fonts").click(actionSwitchFonts);
 				$( 'html' ).click( function () {
 					closeLanguageSettingsDialog();
 				} );
@@ -749,7 +765,7 @@
 
 								<div  id="language-settings-dialog" class="hidden grid uls-menu uls-wide language-settings-dialog">
 									<div class="row">
-										<span id="languagesettings-close" class="icon-close"></span>
+										<div class="uls-language-settings-close-block eight columns offset-by-four"><span id="languagesettings-close" class="icon-close"></span></div>
 									</div>
 									<div class="row" id="languagesettings-panels">
 										<div class="four columns languagesettings-menu">
@@ -770,10 +786,15 @@
 										<div id="languagesettings-settings-panel" class="eight columns">
 											<div class="uls-display-settings-block">
 												<div class="row">
-													<div class="twelve columns">
-														<h3 data-i18n="ext-uls-display-settings-title">Display settings</h3>
+													<div class="twelve columns display-switch-block">
+														<!-- <h3 data-i18n="ext-uls-display-settings-title">Display settings</h3>-->
+														<div class="display-switch button-group">
+															<button class="button down switch-language">Language</button>
+															<button class="button switch-fonts">Fonts</button>
+														</div>
 													</div>
 												</div>
+												<div class="ui-language-settings-block">
 												<div class="ui-language-settings">
 													<div class="row">
 														<div class="eleven columns">
@@ -813,18 +834,14 @@
 														</div>
 													
 													</div>
+													</div>
 													
-												<div class="font-settings-block">
+													
+													
+												<div class="font-settings-block hidden">
 													<div class="row">
 														<div class="twelve columns">
 															<h4 data-i18n="ext-uls-display-settings-font-settings" class="ext-uls-display-settings-font-settings">Font settings</h4>
-														</div>
-													</div>
-													<div class="row">
-														<div class="eleven columns">
-															<label class="checkbox">
-																<input type="checkbox" checked id="webfonts-enable-checkbox">
-																<strong data-i18n="ext-uls-webfonts-settings-title">Download font when needed</strong> <span data-i18n="ext-uls-webfonts-settings-info">Webfonts will be downloaded for displaying text in special scripts.</span> <a target="_blank" href="//www.mediawiki.org/wiki/Special:MyLanguage/Help:Extension:WebFonts" data-i18n="ext-uls-webfonts-settings-info-link">More information</a></label>
 														</div>
 													</div>
 													<div class="row uls-content-fonts" style="">
@@ -842,6 +859,13 @@
 														<div class="six columns">
 															<label class="uls-font-label" id="ui-font-selector-label"></label>
 														</div><select id="ui-font-selector" class="four columns end uls-font-select"></select>
+													</div>
+													<div class="row">
+														<div class="eleven columns">
+															<label class="checkbox">
+																<input type="checkbox" checked id="webfonts-enable-checkbox">
+																<strong data-i18n="ext-uls-webfonts-settings-title">Download font when needed</strong> <span data-i18n="ext-uls-webfonts-settings-info">Webfonts will be downloaded for displaying text in special scripts.</span> <a target="_blank" href="//www.mediawiki.org/wiki/Special:MyLanguage/Help:Extension:WebFonts" data-i18n="ext-uls-webfonts-settings-info-link">More information</a></label>
+														</div>
 													</div>
 													</div>
 													
