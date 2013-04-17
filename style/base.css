@@ -1,3 +1,29 @@
+@font-face{
+	font-family: "opendyslexic";
+	src: url('../fonts/OpenDyslexic-Regular.otf');
+	font-style: normal;
+	font-weight: normal;
+}
+@font-face{
+	font-family: "opendyslexic";
+	src: url('../fonts/OpenDyslexic-Italic.otf');
+	font-style: italic;
+	font-weight: normal;
+}
+@font-face{
+	font-family: "opendyslexic";
+	src: url('../fonts/OpenDyslexic-Bold.otf');
+	font-weight: bold;
+	font-style: normal;
+}
+@font-face{
+	font-family: "opendyslexic";
+	src: url('../fonts/OpenDyslexic-BoldItalic.otf');
+	font-weight: bold;
+	font-style: italic;
+}
+
+
 .article-bg {
 	position: absolute;
 	top: 75px;
@@ -171,6 +197,7 @@ input.searchbox {
 #languagesettings-settings-panel,
 .uls-language-settings-close-block {
 	background: white;
+	/*border-left: 1px solid #f8f8f8;*/
 }
 
 .languages {
@@ -236,7 +263,7 @@ input.searchbox {
 }
 
 .ui-change-clarification {
-	margin: 0 0 10px 0;
+	margin: 0 0 15px 0;
 	color: #555;
 	font-size: 13px;
 }
@@ -250,11 +277,11 @@ input.searchbox {
 
 .more-settings {
 	color: #252525;
-	font-size: 13px;	
-	margin-top: 10px !important;
+	font-size: 16px;	
 	margin-bottom: 10px !important;
-	background: #f8f8f8;
+	/*background: #f8f8f8;*/
 	padding:  10px 0;
+	line-height: 1.8em;
 }
 
 .more-settings .clarification {
@@ -262,10 +289,12 @@ input.searchbox {
 }
 
 .more-settings .login-clarification {
+	font-size: 14px;
 	color: #555;
 }
 .more-settings-login, a {
 	color: #0645AD;
+	font-size: 14px;
 	list-style-type: none;
 	cursor: pointer;
 
@@ -367,6 +396,16 @@ input.searchbox {
 	min-height: 200px;
 }
 
+.ui-language-settings-block,
+.font-settings-block {
+	border-top: 1px solid #EEEEEE; 
+	padding-top: 25px;
+	top: -20px;
+	position:relative;
+	
+}
+
+
 .uls-compact .languagefilter-clear {
 margin-left: -32px;
 }
@@ -412,8 +451,9 @@ margin-left: -32px;
 .button-group {
 	display: inline-block;
 	position: relative;
-	padding: 5px 0 10px 0;
-	left: -25px;
+	padding: 0 0 0 0;
+	left: -20px;
+	z-index:1;
 }
 
 .button-group > button.button {
@@ -450,10 +490,25 @@ margin-left: -32px;
 	padding: 5px 0 15px 15px;
 }
 
-.uls-content-fonts {
+.uls-content-fonts,
+.uls-ui-fonts  {
 	padding: 8px 0;
-	margin: 15px 0 !important;
+	/*margin: 15px 0 !important;*/
 	border-top: 1px solid #EEE;
-	border-bottom: 1px solid #EEE;
 	background: #fbfbfb;
+}
+.uls-ui-fonts  {
+	border-bottom: 1px solid #EEE;
+}
+
+.ext-uls-display-settings-font-settings {
+	margin-bottom: 15px;
+}
+
+.webfonts-enable-checkbox-block {
+	margin-top: 15px;
+}
+
+.webfonts-enable-checkbox-block a {
+	font-size: 10pt;
 }

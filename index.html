@@ -252,6 +252,7 @@
 			var previousUILang=null;
 			var logged= false;
 			var dyslexic = false;
+			var dyslexic_ui = false;
 			var dyslexicLangs=['en','es','it'];
 			var cogElement= "#cog-top";
 			var cogs = ['#cog-top', '#cog-bottom', '#keyboard-top'];
@@ -310,6 +311,7 @@
 				}
 				var filename = "images/article-" + article + "-" + langcode + ".png";
 				$('.article-bg').attr('src', filename);
+				$(".content-language-label").text(getNameForLang(lang));
 			}
 
 			function interLanguageLink() {
@@ -337,7 +339,11 @@
 				$('.language-settings-dialog').addClass('hidden');
 				$('.language-settings').removeClass('active');
 				setArticleLang(contentLang);
-				
+				if(dyslexic_ui){
+					$("body").css({"font-family":'opendyslexic,sans-serif'});
+				}else{
+					$("body").css({"font-family":"sans-serif"});					
+				}
 			}
 			function openLanguageSettingsDialog() {
 				$('.language-settings-dialog').removeClass('hidden');
@@ -405,7 +411,7 @@
 			}
 			
 			function becomeAnonymous(){
-				$(".ui-language-settings, .ext-uls-display-settings-font-settings").addClass("hidden");
+				$(".ui-language-settings").addClass("hidden");
 				$(".more-settings").removeClass("hidden");
 				$(".annon-block").removeClass("hidden");
 				$(".logged-block").addClass("hidden");
@@ -487,7 +493,15 @@
 			
 			function fontSelectionAction(){
 				var value=$(this).val();
-				dyslexic = (value == "OpenDyslexic");
+				if(uiLang == contentLang){
+					dyslexic = (value == "OpenDyslexic");
+					dyslexic_ui = (value == "OpenDyslexic");
+				}else if ( $(this).attr('id') == "content-font-selector"){
+					dyslexic = (value == "OpenDyslexic");
+				}else{
+					dyslexic_ui = (value == "OpenDyslexic");
+				}
+				
 				$("#uls-displaysettings-apply").removeAttr("disabled");
 			}
 			
@@ -560,6 +574,21 @@
 				$(this).addClass("down");
 				$(".font-settings-block").removeClass("hidden");
 				$(".ui-language-settings-block").addClass("hidden");	
+				adjustFontVisibility();
+			}
+			
+			function toggleFontBlock(){
+				$(".uls-content-fonts, .uls-ui-fonts").toggle(80);
+			}
+			
+			function adjustFontVisibility(){
+				if(uiLang == contentLang){
+					$(".ext-uls-webfonts-select-for-ui-info,.uls-content-fonts").addClass('hidden');
+					$(".ext-uls-webfonts-select-for-content-and-display-info").removeClass("hidden");
+				}else{
+					$(".ext-uls-webfonts-select-for-content-and-display-info").addClass("hidden");
+					$(".ext-uls-webfonts-select-for-ui-info,.uls-content-fonts").removeClass('hidden');
+				}
 			}
 			
 			$(document).ready(function() {
@@ -649,6 +678,7 @@
 				$(".uls-font-select").change(fontSelectionAction);
 				$(".switch-language").click(actionSwitchLanguage);
 				$(".switch-fonts").click(actionSwitchFonts);
+				$("#webfonts-enable-checkbox").click(toggleFontBlock);
 				$( 'html' ).click( function () {
 					closeLanguageSettingsDialog();
 				} );
@@ -829,7 +859,7 @@
 														<div class="twelve columns inline-login-form hidden">
 															<input type="text" placeholder="Username"/> <br/>
 															<input type="password" placeholder="Password"/> <br/>
-															<button class="blue button login">Login</button> <button class="button cancel">Cancel</button> <br/>
+															<button class="blue button login">Log in</button> <button class="button cancel">Cancel</button> <br/>
 															<a class="new-account-link">Create new account</a>
 														</div>
 													
@@ -844,24 +874,33 @@
 															<h4 data-i18n="ext-uls-display-settings-font-settings" class="ext-uls-display-settings-font-settings">Font settings</h4>
 														</div>
 													</div>
+													<div class="row uls-ui-fonts" style="">
+														<div class="six columns">
+															<label class="uls-font-label" id="ui-font-selector-label"><strong>Select font for <span class="display-language-label">English</span></strong>
+																<div data-i18n="ext-uls-webfonts-select-for-ui-info" class="ext-uls-webfonts-select-for-ui-info">
+																	Font used for content
+																</div>
+																<div class="ext-uls-webfonts-select-for-content-and-display-info">
+																	Font used for menus and content
+																</div></label>
+														</div>
+														<select id="ui-font-selector" class="four columns end uls-font-select">
+															<option value="OpenDyslexic">OpenDyslexic</option><option value="system" selected="selected">System font</option>
+														</select>
+													</div>
 													<div class="row uls-content-fonts" style="">
 														<div class="six columns">
-															<label class="uls-font-label" id="content-font-selector-label"><strong>Select font for <span class="display-language-label">English</span></strong>
-																<div data-i18n="ext-uls-webfonts-select-for-content-info">
-																	Font used for content
+															<label class="uls-font-label" id="content-font-selector-label"><strong>Select font for <span class="content-language-label">English</span></strong>
+																<div data-i18n="ext-uls-webfonts-select-for-content-info" class="ext-uls-webfonts-select-for-content-info">
+																	Font used for menus
 																</div></label>
 														</div>
 														<select id="content-font-selector" class="four columns end uls-font-select">
 															<option value="OpenDyslexic">OpenDyslexic</option><option value="system" selected="selected">System font</option>
 														</select>
 													</div>
-													<div class="row uls-ui-fonts" style="display: none;">
-														<div class="six columns">
-															<label class="uls-font-label" id="ui-font-selector-label"></label>
-														</div><select id="ui-font-selector" class="four columns end uls-font-select"></select>
-													</div>
 													<div class="row">
-														<div class="eleven columns">
+														<div class="eleven columns webfonts-enable-checkbox-block">
 															<label class="checkbox">
 																<input type="checkbox" checked id="webfonts-enable-checkbox">
 																<strong data-i18n="ext-uls-webfonts-settings-title">Download font when needed</strong> <span data-i18n="ext-uls-webfonts-settings-info">Webfonts will be downloaded for displaying text in special scripts.</span> <a target="_blank" href="//www.mediawiki.org/wiki/Special:MyLanguage/Help:Extension:WebFonts" data-i18n="ext-uls-webfonts-settings-info-link">More information</a></label>
