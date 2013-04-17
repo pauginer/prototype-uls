@@ -332,6 +332,9 @@
 				$('.language-settings-dialog').css("top",$(this).offset().top - $('.language-menu').offset().top  -40);
 				$('.language-settings-dialog').toggleClass('hidden');
 				$(this).toggleClass('active');
+				if($(this).hasClass('active')){
+					scrollToPanel();
+				}
 				
 			}
 
@@ -345,10 +348,16 @@
 					$("body").css({"font-family":"sans-serif"});					
 				}
 			}
+			
+			function scrollToPanel(){
+				if (($('#language-settings-dialog').offset().top + $('#language-settings-dialog').height()) - (window.scrollY + $(window).height())>5) {
+					var target= 5+ window.scrollY +($('#language-settings-dialog').offset().top + $('#language-settings-dialog').height()) - (window.scrollY + $(window).height());
+					$('html, body').animate({ scrollTop: target }, 'slow');
+				}
+			}
 			function openLanguageSettingsDialog() {
 				$('.language-settings-dialog').removeClass('hidden');
 				$('.language-settings').addClass('active');
-				
 			}
 
 			function showInputSettings() {
