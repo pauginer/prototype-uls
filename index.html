@@ -706,6 +706,9 @@
 				$(".switch-language").click(actionSwitchLanguage);
 				$(".switch-fonts").click(actionSwitchFonts);
 				$("#webfonts-enable-checkbox").click(toggleFontBlock);
+				$(".new-article .translate").click(function(){
+					window.location = "../prototype-translate/content-translation.html#mies";
+				});
 				$( 'html' ).click( function () {
 					closeLanguageSettingsDialog();
 				} );
