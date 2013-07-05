@@ -256,10 +256,13 @@
 			var dyslexicLangs=['en','es','it'];
 			var cogElement= "#cog-top";
 			var cogs = ['#cog-top', '#cog-bottom', '#keyboard-top'];
+			var redLinkLangs = ["nl", "az"];
+			var articleTitle=null;
 			
 			function loadArticleInfo(article) {
 				$.getJSON('lang/article/' + article + '.json', function(data) {
 					langs = data.langs;
+					articleTitle = data.title;
 					setArticleLang(contentLang);
 					createArticleLinks();
 					prepareULS();
@@ -298,6 +301,10 @@
 					item.text(lang.name);
 					item.attr('lang', lang.code);
 					item.click(interLanguageLink);
+					if( $.inArray(lang.code,redLinkLangs)>=0){
+						item.addClass("red");
+					}
+					
 					if (contentLang != lang.code) {
 						list.append(item);
 					}
@@ -315,17 +322,28 @@
 			}
 
 			function interLanguageLink() {
-				$("body").hide();
 				var elt = $(this);
-				contentLang = elt.attr('lang');
-				uiLang = elt.attr('lang');
-
-				$('.language').show();
-				setArticleLang(contentLang);
-				createArticleLinks();
-				changeUILanguage(uiLang);
-				$("body").fadeIn();
-
+				
+				if(elt.hasClass("red")){
+					//New article
+					$(".new-article .source-language-name").text($.uls.data.getAutonym( contentLang ));
+					$(".new-article .target-language-name").text(elt.text());
+					
+					$(".new-article .title-box").attr("placeholder", articleTitle);
+					
+					$(".new-article").css("top",elt.offset().top - $('.language-menu').offset().top -40);
+					$(".new-article").toggleClass("hidden");
+				}else{ //Change language
+					$("body").hide();
+					contentLang = elt.attr('lang');
+					uiLang = elt.attr('lang');
+					$('.language').show();
+					setArticleLang(contentLang);
+					createArticleLinks();
+					changeUILanguage(uiLang);
+					$("body").fadeIn();
+				}
+				return false;
 			}
 
 			function toggleLanguageSettingsDialog() {
@@ -1000,6 +1018,15 @@
 								</div>
 
 							</div>
+							<div class="new-article grid hidden">
+								<div class="article-title row"> 
+									<div class="twelve columns">The page does not exist in <span class="target-language-name">Nederlands</span> yet. <br/> Do you want to create it?</div>
+								</div>
+								<div class="title-label row"> <div class="twelve columns">Title in <span class="target-language-name">Nederlands</span>:</div></div>
+								<div class="row"><div class="title-box-block twelve columns"> <input class="title-box twelve columns"></div></div>
+								<div class="row"><div class="actions twelve columns"> <button class="create btn">Create from scratch</button> <a class="translate btn">Translate from <span class="source-language-name">English</span></a></div></div>
+							</div>
+							
 							<div class="menu-group language-menu" data-i18n="p-lang">
 								Languages
 							</div>
@@ -1067,6 +1094,7 @@
 				</div>
 			</div>
 		</div>
+		
 		<img class="article-bg" src="" width="958" height="7000"></img>
 		<div id="keyboard-container" class="keyboard-container hidden"> <div class="row"><span class="keyboard-close"></span></div>
 	<ul id="keyboard">

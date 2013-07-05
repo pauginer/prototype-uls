@@ -512,3 +512,91 @@ margin-left: -32px;
 .webfonts-enable-checkbox-block a {
 	font-size: 10pt;
 }
+
+
+.language-list li.red {
+	color: #ba0000;
+}
+
+.new-article {
+	position:absolute;
+	display: block;
+	min-width: 500px;
+	background: white;
+	left: 160px;
+	border: 1px solid #AAA;
+	z-index:100;
+}
+
+.new-article:before {
+	display: inline-block;
+	content: "";
+	border-right: 20px solid #AAA;
+	border-top: 20px solid transparent;
+	border-bottom: 20px solid transparent;
+	left: -20px;
+	top: 32px;
+	position: absolute;
+}
+
+.new-article:after {
+	display: inline-block;
+	content: "";
+	border-right: 20px solid white;
+	border-top: 20px solid transparent;
+	border-bottom: 20px solid transparent;
+	left: -19px;
+	top: 32px;
+	position: absolute;
+}
+
+
+.new-article .article-title {
+	font-size: 18px;
+	border-bottom: 1px solid #ddd;
+	padding: 10px 5px;
+}
+
+.new-article .title-label {
+	padding: 10px 5px 5px 5px;
+	color: #777;
+}
+
+.new-article .title-box-block{
+	padding: 0 5px 10px 5px;
+}
+
+.new-article .title-box{
+	padding: 5px;
+	border: 1px solid #ddd;
+}
+
+.new-article .actions {
+	padding: 5px 5px 15px 5px;
+}
+
+
+.new-article .btn {
+	margin-right: 10px;
+}
+
+
+.new-article .translate{
+	position: relative;
+	padding-right: 10px;
+}
+.new-article .translate:after {
+	display: inline-block;
+	content: "";
+	border-top: 4px solid #aaa;
+	border-left: 4px solid transparent;
+	border-right: 4px solid transparent;
+	vertical-align: middle;
+	margin-left: 6px;
+
+}
+
+.new-article .translate .source-language-name {
+	padding-right: 5px;
+	border-right: 1px solid #ddd;
+}
