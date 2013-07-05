@@ -523,7 +523,7 @@ margin-left: -32px;
 	display: block;
 	min-width: 500px;
 	background: white;
-	left: 160px;
+	left: 140px;
 	border: 1px solid #AAA;
 	z-index:100;
 }
@@ -535,7 +535,7 @@ margin-left: -32px;
 	border-top: 20px solid transparent;
 	border-bottom: 20px solid transparent;
 	left: -20px;
-	top: 32px;
+	top: 20px;
 	position: absolute;
 }
 
@@ -546,33 +546,36 @@ margin-left: -32px;
 	border-top: 20px solid transparent;
 	border-bottom: 20px solid transparent;
 	left: -19px;
-	top: 32px;
+	top: 20px;
 	position: absolute;
 }
 
 
 .new-article .article-title {
 	font-size: 18px;
-	border-bottom: 1px solid #ddd;
-	padding: 10px 5px;
+	border-bottom: 1px solid #eee;
+	padding: 15px 10px;
+	background: #fbfbfb;
+	font-weight: lighter;
+	line-height: 1.6em;
 }
 
 .new-article .title-label {
-	padding: 10px 5px 5px 5px;
-	color: #777;
+	padding: 15px 10px 10px 10px;
+	color: #555;
 }
 
 .new-article .title-box-block{
-	padding: 0 5px 10px 5px;
+	padding: 0 10px 15px 10px;
 }
 
 .new-article .title-box{
-	padding: 5px;
+	padding: 8px;
 	border: 1px solid #ddd;
 }
 
 .new-article .actions {
-	padding: 5px 5px 15px 5px;
+	padding: 5px 10px 15px 10px;
 }
 
 

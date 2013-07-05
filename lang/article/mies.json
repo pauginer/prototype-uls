@@ -1,0 +1,21 @@
+{"title":"The Persistence of Memory",
+"langs": 
+	[	{"code":"br", "name":"Brezhoneg"},
+		{"code":"ca", "name":"Català"},
+		{"code":"en", "name":"English"},
+		{"code":"es", "name":"Español"},
+		{"code":"it", "name":"Italiano"},
+		{"code":"ja", "name":"日本語"},
+		{"code":"ka", "name":"ქართული"},
+		{"code":"nl", "name":"Nederlands"},
+		{"code":"no", "name":"Norsk bokmål"},
+		{"code":"pt", "name":"Português"},
+		{"code":"fi", "name":"Suomi"},
+		{"code":"ru", "name":"Русский"},
+		{"code":"ta", "name":"தமிழ்"},
+		{"code":"uk", "name":"Українська"},
+		{"code":"vi", "name":"Tiếng Việt"},
+		{"code":"war", "name":"Winaray"},
+		{"code":"zh", "name":"中文"}
+	]
+}

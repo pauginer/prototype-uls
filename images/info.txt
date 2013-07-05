@@ -1,2 +1,5 @@
 Artcicle images extraced using:
 $("#mw-navigation,#mw-page-base,#centralNotice,#mw-head-base,#localNotice").remove()
+
+Export canvas:
+$("canvas").toDataURL()

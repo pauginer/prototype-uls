@@ -242,7 +242,7 @@
 		<script src="libs/bootstrap/js/bootstrap.min.js"></script>
 		<script src="libs/keyboard/js/keyboard.js"></script>
 		<script>
-			var articles = ["memory", "lisa", "pinata"];
+			var articles = ["memory", "lisa", "pinata", "mies"];
 			var article = articles[0];
 			var langs = null;
 			var defaultLang = "en";
@@ -258,6 +258,7 @@
 			var cogs = ['#cog-top', '#cog-bottom', '#keyboard-top'];
 			var redLinkLangs = ["nl", "az"];
 			var articleTitle=null;
+			var targetLanguage;
 			
 			function loadArticleInfo(article) {
 				$.getJSON('lang/article/' + article + '.json', function(data) {
@@ -290,7 +291,7 @@
 				var list = $(".language-list");
 				list.empty();
 				var languages = langs;
-				if(langs.length >30){
+				if(langs.length >15){
 					languages = langs.slice(0,10);
 					$('.uls-trigger-block').removeClass('hidden');
 				}else{
@@ -328,10 +329,10 @@
 					//New article
 					$(".new-article .source-language-name").text($.uls.data.getAutonym( contentLang ));
 					$(".new-article .target-language-name").text(elt.text());
-					
+					targetLanguage = elt.attr("lang");
 					$(".new-article .title-box").attr("placeholder", articleTitle);
 					
-					$(".new-article").css("top",elt.offset().top - $('.language-menu').offset().top -40);
+					$(".new-article").css("top",elt.offset().top - $('.language-menu').offset().top -30);
 					$(".new-article").toggleClass("hidden");
 				}else{ //Change language
 					$("body").hide();
@@ -707,7 +708,7 @@
 				$(".switch-fonts").click(actionSwitchFonts);
 				$("#webfonts-enable-checkbox").click(toggleFontBlock);
 				$(".new-article .translate").click(function(){
-					window.location = "../prototype-translate/content-translation.html#mies";
+					window.location = "../prototype-translate/content-translation.html#"+article+"-"+targetLanguage;
 				});
 				$( 'html' ).click( function () {
 					closeLanguageSettingsDialog();
