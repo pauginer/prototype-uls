@@ -211,15 +211,15 @@ input.searchbox {
 	right: 2px;
 	height: 15px;
 	width: 30px;
-	background: transparent url(../images/cog.png) center right no-repeat;
+	background: transparent url(../images/cog-sprite.png) top right no-repeat;
 	cursor: pointer;
-	padding:3px;
 	
 }
 
 .language-settings.active,
 .language-settings:hover {
-	background-image:  url(../images/cog-hi.png);
+	background-image:  url(../images/cog-sprite.png);
+	background-position: right -19px;
 }
 
 .language-settings-dialog {
